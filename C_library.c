@@ -5,11 +5,19 @@
 
 //Assinaturas
 
-void MenuSobre(void);
-void MenuPrincipal(void);
-void MenuUsuario(void);
-void MenuObras(void);
-void MenuEmprestimo(void);
+void menuSobre(void);
+void menuPrincipal(void);
+void menuUsuario(void);
+void menuObras(void);
+void menuEmprestimo(void);
+void menuCadastro(void);
+void menuConsulta(void);
+void menuAtualizar(void);
+void menuExcluirUser(void);
+void menuCadastrarObra(void);
+void menuConsultarObra(void);
+void menuAtualizarObra(void);
+void menuExcluirObra(void);
 
 //Programa Principal
 
@@ -20,11 +28,20 @@ int main(void) {
     
     SetConsoleOutputCP(CPAGE_UTF8);
 
-    MenuSobre();
-    MenuPrincipal();
-    MenuUsuario();
-    MenuObras();
-    MenuEmprestimo();
+    menuSobre();
+    menuPrincipal();
+    menuUsuario();
+    menuObras();
+    menuEmprestimo();
+    menuCadastro();
+    menuConsulta();
+    menuAtualizar();
+    menuExcluirUser();
+    menuCadastrarObra();
+    menuConsultarObra();
+    menuAtualizarObra();
+    menuExcluirObra();
+    
 
     SetConsoleOutputCP(CPAGE_DEFAULT);
 
@@ -33,7 +50,7 @@ int main(void) {
 
 //Funções
 
-void MenuSobre(void) {
+void menuSobre(void) {
 
     printf("\n");
     printf("//------------------------------------------------------------------------------//\n");
@@ -65,7 +82,7 @@ void MenuSobre(void) {
 
 }
 
-void MenuPrincipal(void) {
+void menuPrincipal(void) {
 
     system("cls");
     printf("\n");
@@ -86,7 +103,7 @@ void MenuPrincipal(void) {
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");   
     getchar();    
 }
-void MenuUsuario(void) {
+void menuUsuario(void) {
     system("cls");
     printf("\n");
     printf("//.....................????????????????????????????????????.....................//\n");
@@ -110,7 +127,7 @@ void MenuUsuario(void) {
 
 }
 
-void MenuObras(void) {
+void menuObras(void) {
 
     system("cls");
     printf("\n");
@@ -135,12 +152,12 @@ void MenuObras(void) {
 
 }
 
-void MenuEmprestimo(void) {    
+void menuEmprestimo(void) {    
     
     system("cls");
     printf("\n");
     printf("//===============================================================================//\n");
-    printf("//=====================|       MÓDULO DE EMPRÉSTIMOS      |======================//\n");
+    printf("//---------------------|       MÓDULO DE EMPRÉSTIMOS      |----------------------//\n");
     printf("//==============================================================================.//\n");
     printf("//.                                                                             .//\n");
     printf("//.   SELECIONE A OPÇÃO DESEJADA:                                               .//\n");
@@ -152,8 +169,190 @@ void MenuEmprestimo(void) {
     printf("//.   4 - ATUALIZAR EMPRÉSTIMO                                                  .//\n");
     printf("//.                                                                             .//\n");
     printf("//===============================================================================//\n");
+    printf("//-------------------------------------------------------------------------------//\n");
     printf("//===============================================================================//\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+}
+
+void menuCadastro(void) {
+    
+    system("cls");
+    printf("\n");
     printf("//===============================================================================//\n");
+    printf("//&&&&&&&&&&&&&&&&&&&&&&|       MÓDULO DE CADASTRO      |&&&&&&&&&&&&&&&&&&&&&&&&//\n");
+    printf("//------------------------------------------------------------------------------.//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   CADASTRO                                                                  .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   NOME COMPLETO:                                                            .//\n");
+    printf("//.   CPF:                                                                      .//\n");
+    printf("//.   EMAIL:                                                                    .//\n");
+    printf("//.   NOME DE USUÁRIO:                                                          .//\n");
+    printf("//.   SENHA:                                                                    .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    printf("//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&//\n");
+    printf("//===============================================================================//\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+}
+
+void menuConsulta(void) {
+    
+    system("cls");
+    printf("\n");
+    printf("//===============================================================================//\n");
+    printf("//&&&&&&&&&&&&&&&&&&&&&&|      MÓDULO DE CONSULTA      |&&&&&&&&&&&&&&&&&&&&&&&&//\n");
+    printf("//------------------------------------------------------------------------------.//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   PESQUISA                                                                  .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   DIGITE O NOME OU CPF DO USUÁRIO:                                          .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    printf("//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&//\n");
+    printf("//===============================================================================//\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+}
+
+void menuAtualizar(void) {
+    
+    system("cls");
+    printf("\n");
+    printf("//===============================================================================//\n");
+    printf("//&&&&&&&&&&&&&&&&&&&&&&|     MÓDULO DE ATUALIZAÇÃO      |&&&&&&&&&&&&&&&&&&&&&&&//\n");
+    printf("//##############################################################################.//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   ATUALIZAÇÃO                                                               .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   O QUE DESEJA ATUALIZAR?                                                   .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   N - NOME                                                                  .//\n");
+    printf("//.   C - CPF                                                                   .//\n");
+    printf("//.   E - EMAIL                                                                 .//\n");
+    printf("//.   U - NOME DE USUÁRIO                                                       .//\n");
+    printf("//.   S - SENHA                                                                 .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//###############################################################################//\n");
+    printf("//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&//\n");
+    printf("//===============================================================================//\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+}
+
+void menuExcluirUser(void) {
+    
+    system("cls");
+    printf("\n");
+    printf("//===============================================================================//\n");
+    printf("//&&&&&&&&&&&&&&&&&&&&&&&&&       MODULO DE EXCLUSÃO      &&&&&&&&&&&&&&&&&&&&&&&//\n");
+    printf("//##############################################################################.//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   EXCLUSÃO                                                                  .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   DIGITE O NOME DO USUÁRIO QUE DESEJA EXCLUIR                               .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   NOME:                                                                     .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//###############################################################################//\n");
+    printf("//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&//\n");
+    printf("//===============================================================================//\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+}
+
+void menuCadastrarObra(void) {
+    
+    system("cls");
+    printf("\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    printf("//!!!!!!!!!!!!!!!!!!!!!|        CADASTRO DE OBRA         |!!!!!!!!!!!!!!!!!!!!!!!//\n");
+    printf("//.-----------------------------------------------------------------------------.//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   CADASTRO                                                                  .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   TÍTULO DA OBRA:                                                           .//\n");
+    printf("//.   AUTOR:                                                                    .//\n");
+    printf("//.   DATA DE PUBLICAÇÃO:                                                       .//\n");
+    printf("//.   EDIÇÃO:                                                                   .//\n");
+    printf("//.   ISBN:                                                                     .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.-----------------------------------------------------------------------------.//\n");
+    printf("//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+}
+
+void menuConsultarObra(void) {
+    
+    system("cls");
+    printf("\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    printf("//$$$$$$$$$$$$$$$$$$$$$$|        CONSULTA DE OBRA        |$$$$$$$$$$$$$$$$$$$$$$$//\n");
+    printf("//------------------------------------------------------------------------------.//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   PESQUISA                                                                  .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   NOME OU ISBN DA OBRA :                                                    .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    printf("//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$//\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+}
+
+void menuAtualizarObra(void) {
+    
+    system("cls");
+    printf("\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    printf("/|||||||||||||||||||||||       ATUALIZAÇÃO DE OBRA       ||||||||||||||||||||||||//\n");
+    printf("//.-----------------------------------------------------------------------------.//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   ATUALIZAÇÃO                                                               .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   O QUE DESEJA ATUALIZAR                                                    .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   T - TÍTULO DA OBRA:                                                       .//\n");
+    printf("//.   A - AUTOR:                                                                .//\n");
+    printf("//.   D - DATA DE PUBLICAÇÃO:                                                   .//\n");
+    printf("//.   E - EDIÇÃO:                                                               .//\n");
+    printf("//.   I - ISBN:                                                                 .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.-----------------------------------------------------------------------------.//\n");
+    printf("//|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||//\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+}
+
+void menuExcluirObra(void) {
+    
+    system("cls");
+    printf("\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    printf("//$$$$$$$$$$$$$$$$$$$$$$|        EXCLUSÃO DE OBRA        |$$$$$$$$$$$$$$$$$$$$$$$//\n");
+    printf("//------------------------------------------------------------------------------.//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   EXCLUSÃO                                                                  .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   ISBN DA OBRA :                                                            .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    printf("//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$//\n");
+    printf("//-------------------------------------------------------------------------------//\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
