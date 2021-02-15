@@ -959,8 +959,6 @@ void moduloObras(void){
     do {
         resposta = menuObras();
         switch(resposta) {
-            case '0':
-            break;
 
             case '1':
             cadastrarObra();
