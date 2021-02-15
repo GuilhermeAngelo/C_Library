@@ -252,10 +252,10 @@ void cadastrarUser(void) {
     scanf("%[0-9]",&cpf);
     getchar();
     printf("//.   EMAIL: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ@0-9.]",&email);
+    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕa-záéíóúâêôãõ@0-9.]",&email);
     getchar();
     printf("//.   NOME DE USUARIO: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ0-9]",&usuario);
+    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕa-záéíóúâêôãõ0-9]",&usuario);
     getchar();
     printf("//.   SENHA: ");
     scanf("%[A-Za-z0-9]",&senha);
@@ -281,7 +281,7 @@ void consultarUser(void) {
     printf("//.   PESQUISA                                                                  .//\n");
     printf("//.                                                                             .//\n");
     printf("//.   DIGITE O NOME OU CPF DO USUARIO: ");
-    scanf("%[A-Za-zÁÉÍÓÚ0-9ÂÊÎÔÃÕáéíóúãõâêîô]",&consulta);
+    scanf("%[A-Za-zÁÉÍÓÚ0-9 ÂÊÎÔÃÕáéíóúãõâêîô]",&consulta);
     getchar();
     printf("//.                                                                             .//\n");
     printf("//-------------------------------------------------------------------------------//\n");
@@ -385,13 +385,13 @@ void atualizarEmail(void){
     printf("//.   ATUALIZACAO                                                               .//\n");
     printf("//.                                                                             .//\n");
     printf("//.   DIGITE O EMAIL RESGISTRADO: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ@0-9.]",&emailA);
+    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕa-záéíóúâêôãõ@0-9.]",&emailA);
     getchar();
     printf("//.   SENHA: ");
     scanf("%[A-Za-z0-9]",&senha);
     getchar();
     printf("//.   DIGITE O NOVO EMAIL: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ@0-9.]",&emailN);
+    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕa-záéíóúâêôãõ@0-9.]",&emailN);
     getchar();
     printf("//.                                                                             .//\n");
     printf("//###############################################################################//\n");
@@ -412,13 +412,13 @@ void atualizarNomeU(void){
     printf("//.   ATUALIZACAO                                                               .//\n");
     printf("//.                                                                             .//\n");
     printf("//.   DIGITE O NOME DE USUARIO ANTIGO: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ0-9]",&nomeA);
+    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕa-záéíóúâêôãõ0-9]",&nomeA);
     getchar();
     printf("//.   SENHA: ");
     scanf("%[A-Za-z0-9]",&senha);
     getchar();
     printf("//.   DIGITE O NOVO NOME DE USUARIO: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ0-9]",&nomeN);
+    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕa-záéíóúâêôãõ0-9]",&nomeN);
     getchar();
     printf("//.                                                                             .//\n");
     printf("//###############################################################################//\n");
@@ -764,7 +764,7 @@ void cadastrarEmp(void) {
     scanf("%[0-9]",&cpf);
     getchar();
     printf("//.   NOME DE USUARIO: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ0-9]",&titulo);
+    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕa-záéíóúâêôãõ0-9]",&titulo);
     getchar();
     printf("//.   SENHA: ");
     scanf("%[A-Za-z0-9]",&senha);
@@ -876,7 +876,7 @@ void devolverEmp(void) {
     printf("//.   ISBN: ");
     scanf("%[0-9]",&isbn);
     getchar();
-    printf("//.   DIAS USANDO: ");
+    printf("//.   DIAS USANDO: ");// voce deve fornecer um numero, caso contrário o programa irá ficar solicitando ele
     scanf("%d",&dias);
     getchar();
     printf("//.   DIAS ALUGADOS: ");
@@ -896,144 +896,142 @@ void devolverEmp(void) {
 
     void moduloUsuario(void) {
         char resposta;
+        
+        do {
+            resposta = menuUsuario();
+            
+            switch(resposta){
 
-        resposta = menuUsuario();
-        
-        switch(resposta)
-        {
-        
-        case '0':
-            break;
-        case '1':
+            case '1':
             cadastrarUser();
             break;
-           
-        case '2':
+            
+            case '2':
             consultarUser();
             break;
-            
-        case '3':
+                
+            case '3':
             moduloAtualizarU();
             break;
-            
-        case '4':
+                
+            case '4':
             excluirUser();
             break;
-                
+                    
         }
-
-    }
-        
+    }while (resposta != '0');
+}
 
 
     void moduloAtualizarU(void) {
         char resposta;
-        
-        resposta = menuAtuUser();
-        switch (resposta)
-        {
-        case 'N':    
+
+        do {
+            resposta = menuAtuUser();
+            switch (resposta){
+                
+            case 'N':    
             atualizarNome();
             break;
-            
-        case 'C':
+                
+            case 'C':
             atualizarCpf();
             break;
 
-        case 'E':
+            case 'E':
             atualizarEmail();
             break;
-        case 'U':
+
+            case 'U':
             atualizarNomeU();
             break;
-         case 'S':
+
+            case 'S':
             atualizarSenha();
             break;
-        case '0':
-            break;
-            }
-    }
+
+        }    
+    } while (resposta != '0');
+}
 
 void moduloObras(void){
     char resposta;
-    
-    resposta = menuObras();
-    switch(resposta) {
-        case '0':
-        break;
+    do {
+        resposta = menuObras();
+        switch(resposta) {
+            case '0':
+            break;
 
-        case '1':
-        cadastrarObra();
-        break;
+            case '1':
+            cadastrarObra();
+            break;
 
-        case '2':
-        consultarObra();
-        break;
+            case '2':
+            consultarObra();
+            break;
 
-        case '3':
-        moduloAtualizarO();
-        break;
-        
-        case '4':
-        excluirObra();
-        break;
+            case '3':
+            moduloAtualizarO();
+            break;
+            
+            case '4':
+            excluirObra();
+            break;
 
         }
-    
-   
+    }while (resposta != '0');
 }
 
 void moduloAtualizarO(void){
     char resposta;    
+    
+    do {
+        resposta = atualizarObra();
+        switch (resposta)
+            {
+            case 'T':    
+                atualizarTitulo();
+                break;
+                
+            case 'A':
+                atualizarAutor();
+                break;
 
-    resposta = atualizarObra();
-    switch (resposta)
-        {
-        case 'T':    
-            atualizarTitulo();
+            case 'D':
+                atualizardatap();
+                break;
+            case 'E':
+                atualizarEdicao();
+                break;
+            case 'I':
+                atualizarIsbn();
+                break;
+        }
+    } while (resposta != '0');
+}
+void moduloEmprestimo(void){
+    
+    char resposta;
+    do{
+        resposta = menuEmprestimo();
+        switch(resposta) {
+
+            case '1':
+            cadastrarEmp();
+            break;
+
+            case '2':
+            consultarEmp();
+            break;
+
+            case '3':
+            atualizarEmp();
             break;
             
-        case 'A':
-            atualizarAutor();
-            break;
-
-        case 'D':
-            atualizardatap();
-            break;
-        case 'E':
-            atualizarEdicao();
-            break;
-         case 'I':
-            atualizarIsbn();
-            break;
-        case '0':
-            break;
-            }
-}
-
-void moduloEmprestimo(void){
-    char resposta;
-
-    resposta = menuEmprestimo();
-    switch(resposta) {
-        case '0':
-        break;
-
-        case '1':
-        cadastrarEmp();
-        break;
-
-        case '2':
-        consultarEmp();
-        break;
-
-        case '3':
-        atualizarEmp();
-        break;
-        
-        case '4':
-        devolverEmp();
-        break;  
+            case '4':
+            devolverEmp();
+            break;  
 
         }
-    }
+    } while (resposta != '0');    
+}
