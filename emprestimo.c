@@ -185,7 +185,7 @@ void devolverEmp(void) {
     getchar();
     multa = (dias - diasAlugado)*3;// vou fazer a função ainda(pois existiria uma multa negativa).Varei a validação quando chegar a semana.//
     printf("//.                                                                             .//\n");
-    printf("//.   MULTA: %d                                                                 .//\n",multa);
+    printf("//.   MULTA: %d                                                                 .//\n",&multa);
     printf("//.                                                                             .//\n");
     printf("//-------------------------------------------------------------------------------//\n");
     printf("//...............................................................................//\n");

@@ -1,3 +1,4 @@
+
 void cadastrarObra(void) {
     char titulo[51];
     char autor[51];

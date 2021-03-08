@@ -48,6 +48,7 @@ int validaCPF(char cpf[]) {
 // lembrar de criar a variável para receber.
 
 //modificada de https://repl.it/@flaviusgorgonio/ValidacaoDeEntradasc#valida.c, feita por @flaviusgoronio e modificada por @GuilheremAngelo
+
 int validaNome(char nome[]){
   if (strlen(nome) <= 1 || strlen(nome) > 61){
     return 0;

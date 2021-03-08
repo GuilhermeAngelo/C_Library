@@ -1,3 +1,7 @@
+#include"usuario.h"
+#include"obras.h"
+#include"emprestimo.h"
+#include"menus.h"
 void moduloUsuario(void) {
     char resposta;
         
