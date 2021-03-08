@@ -173,7 +173,7 @@ int validaEmail(char email[]){
       return 0;
     }
 }
-//modificada de https://repl.it/@flaviusgorgonio/ValidacaoDeEntradasc#valida.c, feita por @flaviusgoronio e modificada por @GuilheremAngelo
+//modificada de https://repl.it/@flaviusgorgonio/ValidacaoDeEntradasc#valida.c, feita por @flaviusgoronio e modificada por @GuilheremAngelo.
 int validaAutor(char autor[]){
   if (strlen(autor) <= 1 || strlen(autor) > 61){
     return 0;
