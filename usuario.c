@@ -1,9 +1,10 @@
+#include "validacoes.h"
+
 void cadastrarUser(void) {
-    
     char nome[61];
     char cpf[12];
     char email[61];
-    char usuario[12];
+    char usuario[16];
     char senha[16];
 
     system("cls");
@@ -15,20 +16,50 @@ void cadastrarUser(void) {
     printf("//.   CADASTRO                                                                  .//\n");
     printf("//.                                                                             .//\n");
     printf("//.   NOME COMPLETO: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ]",&nome);
+    scanf("%[^\n]",nome);
     getchar();
-    printf("//.   CPF: ");
-    scanf("%[0-9]",&cpf);
+    while(validaNome(nome) == 0){
+        printf("//.   NOME INVALIDO.\n\n");
+        printf("//.   NOME COMPLETO: ");
+        scanf("%[^\n]",nome);
+        getchar();
+    }
+    printf("//.   CPF - apenas numeros - : ");
+    scanf("%[0-9]",cpf);
     getchar();
+    while (validaCPF(cpf) == 0){
+        printf("//.   CPF INVALIDO.\n\n");
+        printf("//.   CPF - apenas numeros - : ");
+        scanf("%[0-9]", cpf);
+        getchar();
+    }
     printf("//.   EMAIL: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕa-záéíóúâêôãõ@0-9.]",&email);
+    scanf("%[^\n]",email);
     getchar();
-    printf("//.   NOME DE USUARIO: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕa-záéíóúâêôãõ0-9]",&usuario);
+    while(validaEmail(email) == 0) {
+        printf("//.   EMAIL INVALIDO.\n\n");
+        printf("//.   EMAIL: ");
+        scanf("%[^\n]",email);
+        getchar();
+    }
+    printf("//.   NOME DE USUARIO - MINIMO 4 CARACTERES - : ");
+    scanf("%[^\n]",usuario);
     getchar();
-    printf("//.   SENHA: ");
-    scanf("%[A-Za-z0-9]",&senha);
+    while (validaUsuario(usuario) == 0) {
+        printf(".//   NOME DE USUARIO INVALIDO.\n\n");
+        printf(".//   NOME DE USUARIO - MINIMO 4 CARACTERES -: ");
+        scanf("%[^\n]",usuario);
+        getchar();
+    }
+    printf("//.   SENHA - MINIMO 4 CARACTERES - : ");
+    scanf("%[^\n]",senha);
     getchar();
+    while(validaSenha(senha) == 0){
+        printf(".//   SENHA INVALIDA.\n\n");
+        printf("//.   SENHA - MINIMO 4 CARACTERES - : ");
+        scanf("%[^\n]",senha);
+        getchar();
+    }
     printf("//.                                                                             .//\n");
     printf("//-------------------------------------------------------------------------------//\n");
     printf("//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&//\n");
@@ -39,7 +70,7 @@ void cadastrarUser(void) {
 }
 
 void consultarUser(void) {
-    char consulta[12];
+    char consulta[61];
 
     system("cls");
     printf("\n");
@@ -49,8 +80,8 @@ void consultarUser(void) {
     printf("//.                                                                             .//\n");
     printf("//.   PESQUISA                                                                  .//\n");
     printf("//.                                                                             .//\n");
-    printf("//.   DIGITE O NOME OU CPF DO USUARIO: ");
-    scanf("%[A-Za-zÁÉÍÓÚ0-9 ÂÊÎÔÃÕáéíóúãõâêîô]",&consulta);
+    printf("//.   DIGITE O NOME DO USUÁRIO: ");
+    scanf("%[A-Za-zÁÉÍÓÚ0-9 ÂÊÎÔÃÕáéíóúãõâêîô]",consulta);
     getchar();
     printf("//.                                                                             .//\n");
     printf("//-------------------------------------------------------------------------------//\n");
@@ -101,13 +132,13 @@ void atualizarNome(void){
     printf("//.   ATUALIZACAO                                                               .//\n");
     printf("//.                                                                             .//\n");
     printf("//.   DIGITE O NOME ANTIGO: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ]",&nomeA);
+    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ]",nomeA);
     getchar();
     printf("//.   SENHA: ");
-    scanf("%[A-Za-z0-9]",&senha);
+    scanf("%[A-Za-z0-9]",senha);
     printf("//.   DIGITE O NOME NOVO: ");
     getchar();
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ]",&nomeN);
+    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ]",nomeN);
     getchar();
     printf("//.                                                                             .//\n");
     printf("//###############################################################################//\n");
@@ -126,15 +157,27 @@ void atualizarCpf(void){
     printf("//.                                                                             .//\n");
     printf("//.   ATUALIZACAO                                                               .//\n");
     printf("//.                                                                             .//\n");
-    printf("//.   DIGITE O CPF RESGISTRADO: ");
+    printf("//.   CPF REGISTRADO - apenas numeros - : ");
     scanf("%[0-9]",cpfA);
     getchar();
+    while (validaCPF(cpfA) == 0){
+        printf("//.   CPF INVALIDO\n\n");
+        printf("//.   CPF REGISTRADO - apenas numeros - : ");
+        scanf("%[0-9]", cpfA);
+        getchar();
+    }
     printf("//.   SENHA: ");
-    scanf("%[A-Za-z0-9]",&senha);
+    scanf("%[A-Za-z0-9]",senha);
     getchar();
-    printf("//.   DIGITE O NOVO CPF: ");
-    scanf("%[0-9]",&cpfN);
+    printf("//.   DIGITE O NOVO CPF - APENAS NUMEROS - : ");
+    scanf("%[0-9]",cpfN);
     getchar();
+    while (validaCPF(cpfN) == 0){
+        printf("//.   CPF INVALIDO\n\n");
+        printf("//.   DIGITE O NOVO CPF- APENAS NUMEROS - : ");
+        scanf("%[0-9]", cpfN);
+        getchar();
+    }
     printf("//.                                                                             .//\n");
     printf("//###############################################################################//\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
@@ -154,13 +197,13 @@ void atualizarEmail(void){
     printf("//.   ATUALIZACAO                                                               .//\n");
     printf("//.                                                                             .//\n");
     printf("//.   DIGITE O EMAIL RESGISTRADO: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕa-záéíóúâêôãõ@0-9.]",&emailA);
+    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕa-záéíóúâêôãõ@0-9.]",emailA);
     getchar();
     printf("//.   SENHA: ");
-    scanf("%[A-Za-z0-9]",&senha);
+    scanf("%[A-Za-z0-9]",senha);
     getchar();
     printf("//.   DIGITE O NOVO EMAIL: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕa-záéíóúâêôãõ@0-9.]",&emailN);
+    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕa-záéíóúâêôãõ@0-9.]",emailN);
     getchar();
     printf("//.                                                                             .//\n");
     printf("//###############################################################################//\n");
@@ -171,8 +214,8 @@ void atualizarEmail(void){
 
 void atualizarNomeU(void){
     system("cls");
-    char nomeA[12];
-    char nomeN[12];
+    char nomeA[16];
+    char nomeN[16];
     char senha[16];
     printf("//===============================================================================//\n");
     printf("//&&&&&&&&&&&&&&&&&&&&&&|     ATUALIZACAO  NOME_USU      |&&&&&&&&&&&&&&&&&&&&&&&//\n");
@@ -181,13 +224,13 @@ void atualizarNomeU(void){
     printf("//.   ATUALIZACAO                                                               .//\n");
     printf("//.                                                                             .//\n");
     printf("//.   DIGITE O NOME DE USUARIO ANTIGO: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕa-záéíóúâêôãõ0-9]",&nomeA);
+    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕa-záéíóúâêôãõ0-9]",nomeA);
     getchar();
     printf("//.   SENHA: ");
-    scanf("%[A-Za-z0-9]",&senha);
+    scanf("%[A-Za-z0-9]",senha);
     getchar();
     printf("//.   DIGITE O NOVO NOME DE USUARIO: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕa-záéíóúâêôãõ0-9]",&nomeN);
+    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕa-záéíóúâêôãõ0-9]",nomeN);
     getchar();
     printf("//.                                                                             .//\n");
     printf("//###############################################################################//\n");
@@ -200,16 +243,22 @@ void atualizarSenha(void){
     
     system("cls");
     char senhaN[16];
-    char cpf[16];
+    char cpf[12];
     printf("//===============================================================================//\n");
     printf("//&&&&&&&&&&&&&&&&&&&&&&|      ATUALIZACAO DE SENHA      |&&&&&&&&&&&&&&&&&&&&&&&//\n");
     printf("//##############################################################################.//\n");
     printf("//.                                                                             .//\n");
     printf("//.   ATUALIZACAO                                                               .//\n");
     printf("//.                                                                             .//\n");
-    printf("//.   DIGITE O CPF: ");
-    scanf("%[0-9]",&cpf);
+    printf("//.   CPF - apenas numeros - : ");
+    scanf("%[0-9]",cpf);
     getchar();
+    while (validaCPF(cpf) == 0){
+        printf("//.   CPF INVALIDO\n\n");
+        printf("//.   CPF - apenas numeros - : ");
+        scanf("%[0-9]", cpf);
+        getchar();
+    }
     printf("//.   SENHA NOVA: ");
     scanf("%[A-Za-z0-9]",&senhaN);
     getchar();
@@ -233,9 +282,15 @@ void excluirUser(void) {
     printf("//.                                                                             .//\n");
     printf("//.   DIGITE O CPF DO USUARIO QUE DESEJA EXCLUIR                                .//\n");
     printf("//.                                                                             .//\n");
-    printf("//.   CPF: ");
-    scanf("%[0-9]",&cpf);
+    printf("//.   CPF - apenas numeros - : ");
+    scanf("%[0-9]",cpf);
     getchar();
+    while (validaCPF(cpf) == 0){
+        printf("//.   CPF INVALIDO\n\n");
+        printf("//.   CPF - apenas numeros - : ");
+        scanf("%[0-9]", cpf);
+        getchar();
+    }
     printf("//.                                                                             .//\n");
     printf("//###############################################################################//\n");
     printf("//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&//\n");
