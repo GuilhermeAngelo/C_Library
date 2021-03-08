@@ -3,6 +3,7 @@
 #include <locale.h>
 #include <time.h>
 #include <locale.h>
+#include <string.h>
 #include "menus.h"
 #include "usuario.h"
 #include "obras.h"

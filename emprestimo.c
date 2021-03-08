@@ -1,3 +1,5 @@
+#include "validacoes.h"
+
 void cadastrarEmp(void) {
     
     char titulo[31];
@@ -6,7 +8,8 @@ void cadastrarEmp(void) {
     char isbn[14];
     char dias[3];
     char cpf[12];
-    char nome[51];
+    char nome[61];
+    char usuario[16];
     char senha[16];
 
     system("cls");
@@ -18,26 +21,32 @@ void cadastrarEmp(void) {
     printf("//.   CADASTRO DE EMPRESTIMO                                                    .//\n");
     printf("//.                                                                             .//\n");
     printf("//.   TITULO DA OBRA: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ0-9]",&titulo);
+    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ0-9]",titulo);
     getchar();
     printf("//.   AUTOR: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ]",&autor);
+    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ]",autor);
     getchar();
     printf("//.   ISBN: ");
-    scanf("%[0-9]",&isbn);
+    scanf("%[0-9]",isbn);
     getchar();
     printf("//.   DIAS: ");
-    scanf("%[0-9]",&dias);
+    scanf("%[0-9]",dias);
     getchar();
     printf("//.                                                                             .//\n");
-    printf("//.   CPF: ");
-    scanf("%[0-9]",&cpf);
+    printf("//.   CPF - apenas numeros - : ");
+    scanf("%[0-9]",cpf);
     getchar();
+    while (validaCPF(cpf) == 0){
+        printf("//.   CPF INVALIDO\n\n");
+        printf("//.   CPF - apenas numeros - : ");
+        scanf("%[0-9]", cpf);
+        getchar();
+    }
     printf("//.   NOME DE USUARIO: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕa-záéíóúâêôãõ0-9]",&titulo);
+    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕa-záéíóúâêôãõ0-9]",usuario);
     getchar();
     printf("//.   SENHA: ");
-    scanf("%[A-Za-z0-9]",&senha);
+    scanf("%[A-Za-z0-9]",senha);
     getchar();
     printf("//.                                                                             .//\n");
     printf("//.-----------------------------------------------------------------------------.//\n");
@@ -58,8 +67,15 @@ void consultarEmp(void) {
     printf("//.                                                                             .//\n");
     printf("//.   PESQUISA                                                                  .//\n");
     printf("//.                                                                             .//\n");
-    printf("//.   CPF DO USUARIO: ");
-    scanf("%[0-9]",&cpf);
+    printf("//.   CPF - apenas numeros - : ");
+    scanf("%[0-9]",cpf);
+    getchar();
+    while (validaCPF(cpf) == 0){
+        printf("//.   CPF INVALIDO\n\n");
+        printf("//.   CPF - apenas numeros - : ");
+        scanf("%[0-9]", cpf);
+        getchar();
+    }
     getchar();
     printf("//.                                                                             .//\n");
     printf("//-------------------------------------------------------------------------------//\n");
@@ -81,7 +97,8 @@ char atualizarEmp(void) {
     char isbn[14];
     char dias[3];
     char cpf[12];
-    char nome[51];
+    char nome[61];
+    char usuario[16];
     char senha[16];
 
     system("cls");
@@ -93,26 +110,33 @@ char atualizarEmp(void) {
     printf("//.   ATUALIZAÇÃO DE EMPRESTIMO                                                 .//\n");
     printf("//.                                                                             .//\n");
     printf("//.   TITULO DA OBRA: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ0-9]",&titulo);
+    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ0-9]",titulo);
     getchar();
     printf("//.   AUTOR: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ]",&autor);
+    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ]",autor);
     getchar();
     printf("//.   ISBN: ");
-    scanf("%[0-9]",&isbn);
+    scanf("%[0-9]",isbn);
     getchar();
     printf("//.   DIAS: ");
-    scanf("%[0-9]",&dias);
+    scanf("%[0-9]",dias);
     getchar();
     printf("//.                                                                             .//\n");
-    printf("//.   CPF: ");
-    scanf("%[0-9]",&cpf);
+    printf("//.   CPF - apenas numeros - : ");
+    scanf("%[0-9]",cpf);
+    getchar();
+    while (validaCPF(cpf) == 0){
+        printf("//.   CPF INVALIDO\n\n");
+        printf("//.   CPF - apenas numeros - : ");
+        scanf("%[0-9]", cpf);
+        getchar();
+    }
     getchar();
     printf("//.   NOME DE USUARIO: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ0-9]",&titulo);
+    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ0-9]",usuario);
     getchar();
     printf("//.   SENHA: ");
-    scanf("%[A-Za-z0-9]",&senha);
+    scanf("%[A-Za-z0-9]",senha);
     getchar();
     printf("//.                                                                             .//\n");
     printf("//.-----------------------------------------------------------------------------.//\n");
@@ -140,17 +164,24 @@ void devolverEmp(void) {
     printf("//.                                                                             .//\n");
     printf("//.   DEVOLUCAO                                                                 .//\n");
     printf("//.                                                                             .//\n");
-    printf("//.   CPF: ");
-    scanf("%[0-9]",&cpf);
+    printf("//.   CPF - apenas numeros - : ");
+    scanf("%[0-9]",cpf);
+    getchar();
+    while (validaCPF(cpf) == 0){
+        printf("//.   CPF INVALIDO\n\n");
+        printf("//.   CPF - apenas numeros - : ");
+        scanf("%[0-9]", cpf);
+        getchar();
+    }
     getchar();
     printf("//.   ISBN: ");
-    scanf("%[0-9]",&isbn);
+    scanf("%[0-9]",isbn);
     getchar();
     printf("//.   DIAS USANDO: ");// voce deve fornecer um numero, caso contrário o programa irá ficar solicitando ele
-    scanf("%d",&dias);
+    scanf("%d",dias);
     getchar();
     printf("//.   DIAS ALUGADOS: ");
-    scanf("%d",&diasAlugado);
+    scanf("%d",diasAlugado);
     getchar();
     multa = (dias - diasAlugado)*3;// vou fazer a função ainda(pois existiria uma multa negativa).Varei a validação quando chegar a semana.//
     printf("//.                                                                             .//\n");
