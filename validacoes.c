@@ -117,7 +117,7 @@ int validaSenha(char senha[]){
 int validaEmail(char email[]){
 
   int tam, num, ponto, arroba,letraM, letraMi,valido,valido1 = 1;
-  
+  int count = 0;
   tam = strlen(email);
   
   if(tam < 10 || tam > 61){
@@ -131,14 +131,12 @@ int validaEmail(char email[]){
         return 0;
       }
     }
-    if(email[i] == ' '){
-        return 0;
-      }
     if (email[i] == '.'){
       ponto = 1;
     }
     if (email[i] == '@'){
       arroba = 1;
+      count++;
     }
     if (email[i] <='z' && email[i] >= 'a'){
       letraMi = 1;
@@ -149,8 +147,8 @@ int validaEmail(char email[]){
     if (email[i] <='9' && email[i] >= '0'){
       num = 1;
     }
-    if((ponto == 1 && arroba == 1 && (letraM == 1 || letraMi == 1) == 1) ||
-    (ponto == 1 && arroba == 1 && (letraM == 1 || letraMi == 1) == 1 && num)){
+    if((count == 1 && ponto == 1 && arroba == 1 && (letraM == 1 || letraMi == 1) == 1) ||
+    (count == 1 && ponto == 1 && arroba == 1 && (letraM == 1 || letraMi == 1) == 1 && num)){
       valido = 1;
     } else{
       valido = 0;

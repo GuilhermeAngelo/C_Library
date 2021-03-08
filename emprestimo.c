@@ -43,10 +43,10 @@ void cadastrarEmp(void) {
         getchar();
     }
     printf("//.   NOME DE USUARIO: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕa-záéíóúâêôãõ0-9]",usuario);
+    scanf("%[^\n]",usuario);
     getchar();
     printf("//.   SENHA: ");
-    scanf("%[A-Za-z0-9]",senha);
+    scanf("%[^\n]",senha);
     getchar();
     printf("//.                                                                             .//\n");
     printf("//.-----------------------------------------------------------------------------.//\n");
@@ -133,10 +133,10 @@ char atualizarEmp(void) {
     }
     getchar();
     printf("//.   NOME DE USUARIO: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ0-9]",usuario);
+    scanf("%[^\n]",usuario);
     getchar();
     printf("//.   SENHA: ");
-    scanf("%[A-Za-z0-9]",senha);
+    scanf("%[^\n]",senha);
     getchar();
     printf("//.                                                                             .//\n");
     printf("//.-----------------------------------------------------------------------------.//\n");

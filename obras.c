@@ -1,3 +1,4 @@
+#include "validacoes.h"
 
 void cadastrarObra(void) {
     char titulo[51];
@@ -18,8 +19,14 @@ void cadastrarObra(void) {
     scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ0-9]",titulo);
     getchar();
     printf("//.   AUTOR: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ]",autor);
+    scanf("%[^\n]",autor);
     getchar();
+    while(validaAutor(autor) == 0){
+        printf("//.   O NOME DIGITADO INVALIDO. POR FAVOR, DIGITAR NOVAMENTE.\n\n");
+        printf("//.   AUTOR: ");
+        scanf("%[^\n]",autor);
+        getchar();
+    }
     printf("//.   DATA DE PUBLICACAO: ");
     scanf("%[0-9/]",datap);
     getchar();
