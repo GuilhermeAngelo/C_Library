@@ -1,10 +1,12 @@
 #include "validacoes.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 void cadastrarEmp(void) {
     
     char titulo[31];
     char autor[51];
-    char edicao[3];
+    char edicao[4];
     char isbn[14];
     char dias[3];
     char cpf[12];
@@ -93,7 +95,7 @@ char atualizarEmp(void) {
 
     char titulo[31];
     char autor[51];
-    char edicao[3];
+    char edicao[4];
     char isbn[14];
     char dias[3];
     char cpf[12];

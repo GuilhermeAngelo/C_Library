@@ -9,6 +9,7 @@
 #include "obras.h"
 #include "emprestimo.h"
 #include "modulos.h"
+
 //Programa Principal
 
 int main(void) {
@@ -26,6 +27,8 @@ int main(void) {
             case '2':   moduloObras();
                         break;
             case '3':   moduloEmprestimo();
+                        break;
+            case '4':   menuRelatorio();
                         break;
         }
     } while (op != '0');

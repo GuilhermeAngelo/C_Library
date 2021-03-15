@@ -1,10 +1,12 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "validacoes.h"
 
 void cadastrarObra(void) {
     char titulo[51];
     char autor[51];
     char datap[11];
-    char edicao[3];
+    char edicao[4];
     char isbn[14];
 
     system("cls");
@@ -183,8 +185,8 @@ void atualizardatap(void){
 
 void atualizarEdicao(void){
     char isbn[14];
-    char edicaoA[3];
-    char edicaoN[3];
+    char edicaoA[4];
+    char edicaoN[4];
     system("cls");
     printf("//===============================================================================//\n");
     printf("//&&&&&&&&&&&&&&&&&&&&&&|     ATUALIZACAO DE EDICAO      |&&&&&&&&&&&&&&&&&&&&&&&//\n");

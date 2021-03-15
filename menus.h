@@ -12,3 +12,6 @@ char menuObras(void);
 
 //exibe o menu sobre emprestimos
 char menuEmprestimo(void);
+
+//exibe o menu de relatorios
+char menuRelatorio(void);

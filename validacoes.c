@@ -199,3 +199,40 @@ int validaAutor(char autor[]){
   } 
   return 1;
 }
+
+int validaIsbn(char isbn[]){
+  int tam;
+  tam = strlen(isbn);
+
+  if (tam < 13 || tam > 13){
+    return 0;
+  }
+  for(int i = 0;i < tam; i++){
+    if (isbn[i] <= '9' || isbn[i] >= '0'){
+      continue;
+    }
+    else{
+      return 0;
+    }
+  }
+  return 1;
+}
+
+int validaEdicao(char edicao[]){
+  int tam;
+  tam = strlen(edicao);
+
+  if (tam > 3 || tam < 1){
+    return 0;
+  }
+
+  for(int i = 0; i < tam; i++){
+    if (edicao[i] <= '9' && edicao[i] >= '0' ){
+      continue;
+    }
+    else{
+      return 0;
+    }
+  }
+  return 1;
+}

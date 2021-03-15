@@ -1,4 +1,6 @@
 #include "validacoes.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 void cadastrarUser(void) {
     char nome[61];

@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 void menuSobre(void) {
 
     printf("\n");
@@ -13,7 +16,7 @@ void menuSobre(void) {
     printf("//------------------------------------------------------------------------------//\n");
     printf("//                                                                              //\n");
     printf("//                      /////////////////////////////////////                   //\n");
-    printf("//*********************// C_Library: Gestão de Biblioteca //********************//\n");
+    printf("//*********************// C_Library: Gestao de Biblioteca //********************//\n");
     printf("//*                   /////////////////////////////////////                    *//\n");
     printf("//*                                                                            *//\n");
     printf("//*    O projeto tem como objetivo criar um sistema que consiga Possibilitar o *//\n");
@@ -45,6 +48,7 @@ char menuPrincipal(void) {
     printf("//*   1 - USUARIOS                                                             *//\n");
     printf("//*   2 - OBRAS/LIVROS                                                         *//\n");
     printf("//*   3 - EMPRESTIMOS                                                          *//\n");
+    printf("//*   4 - RELATORIOS                                                           *//\n");
     printf("//*                                                                            *//\n");
     printf("//******************************************************************************//\n");
     printf("Selecione: ");
@@ -128,6 +132,31 @@ char menuEmprestimo(void) {
     printf("//.   2 - PESQUISAR DADOS/CONSULTAR EMPRESTIMO                                  .//\n");
     printf("//.   3 - ATUALIZAR EMPRESTIMO                                                  .//\n");
     printf("//.   4 - DEVOLVER ITEM EMPRESTADO                                              .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//===============================================================================//\n");
+    printf("Selecione: ");
+    scanf("%c",&escolha);
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+    return escolha;
+}
+
+char menuRelatorio(void){
+    char escolha;
+
+    system("cls");
+    printf("\n");
+    printf("//===============================================================================//\n");
+    printf("//---------------------|       MODULO DE RELATORIOS       |----------------------//\n");
+    printf("//==============================================================================.//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   SELECIONE A OPCAO DESEJADA:                                               .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   0 - RETORNAR AO MENU PRINCIPAL                                            .//\n");
+    printf("//.   1 - RELATORIO DE CLIENTES                                                 .//\n");
+    printf("//.   2 - RELATORIO DE OBRAS                                                    .//\n");
+    printf("//.   3 - RELATORIO DE EMPRESTIMO                                               .//\n");
     printf("//.                                                                             .//\n");
     printf("//===============================================================================//\n");
     printf("Selecione: ");
