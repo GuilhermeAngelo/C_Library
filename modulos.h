@@ -12,3 +12,5 @@ void moduloAtualizarO(void);
 
 //Executa as funções referentes aos emprestimos
 void moduloEmprestimo(void);
+
+void moduloRelatorio(void);

@@ -137,3 +137,20 @@ void moduloEmprestimo(void){
         }
     } while (resposta != '0');    
 }
+
+void moduloRelatorio(void){
+    char resposta;
+    do {
+        resposta = menuRelatorio();
+        switch(resposta){
+            case '1':
+            relatorioCli();
+            
+            case '2':
+            relatorioObra();
+
+            case '3':
+            relatorioEmp();
+        }
+    } while(resposta != '0');
+}
