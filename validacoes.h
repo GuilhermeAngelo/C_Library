@@ -10,3 +10,13 @@ int validaUsuario(char[]);
 int validaSenha(char[]);
 //Recebe uma string composta letras sem caracteres especiais e valida se é um nome. Se for retorna 1, caso contrário retorna 0.
 int validaAutor(char[]);
+
+int converteDia(char[]);
+
+int converteMes(char[]);
+
+int converteAno(char[]);
+
+int bissexto(int);
+
+int testaData(int, int, int);

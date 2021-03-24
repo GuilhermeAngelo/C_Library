@@ -145,12 +145,15 @@ void moduloRelatorio(void){
         switch(resposta){
             case '1':
             relatorioCli();
-            
+            break;
+
             case '2':
             relatorioObra();
+            break;
 
             case '3':
             relatorioEmp();
+            break;
         }
     } while(resposta != '0');
 }

@@ -1,4 +1,6 @@
 #include <string.h>
+#include <math.h>
+
 //função retirada de https://repl.it/@flaviusgorgonio/validacaoCPFc#main.c e feita por @flaviusgorgonio,2021.
 
 int validaCPF(char cpf[]) {
@@ -50,7 +52,7 @@ int validaCPF(char cpf[]) {
 //modificada de https://repl.it/@flaviusgorgonio/ValidacaoDeEntradasc#valida.c, feita por @flaviusgoronio e modificada por @GuilheremAngelo
 
 int validaNome(char nome[]){
-  if (strlen(nome) <= 1 || strlen(nome) > 61){
+  if (strlen(nome) <= 1 || strlen(nome) > 60){
     return 0;
   }
   for (int i = 0; nome[i] != '\0'; i++){
@@ -76,7 +78,7 @@ int validaNome(char nome[]){
 }
 //modificada de https://repl.it/@flaviusgorgonio/ValidacaoDeEntradasc#valida.c, feita por @flaviusgoronio e modificada por @GuilheremAngelo
 int validaUsuario(char usuario[]){
-    if(strlen(usuario) < 4 || strlen(usuario) > 16){
+    if(strlen(usuario) < 4 || strlen(usuario) > 15){
     return 0;
   }
   for(int i = 0; usuario[i] != '\0'; i++){
@@ -95,7 +97,7 @@ int validaUsuario(char usuario[]){
 //modificada de https://repl.it/@flaviusgorgonio/ValidacaoDeEntradasc#valida.c, feita por @flaviusgoronio e modificada por @GuilheremAngelo
 int validaSenha(char senha[]){
   
-  if(strlen(senha) < 4 || strlen(senha) > 16){
+  if(strlen(senha) < 4 || strlen(senha) > 15){
     return 0;
   }
   for(int i = 0; senha[i] != '\0'; i++){
@@ -120,7 +122,7 @@ int validaEmail(char email[]){
   int count = 0;
   tam = strlen(email);
   
-  if(tam < 10 || tam > 61){
+  if(tam < 10 || tam > 60){
     return 0;
   }
   for(int i = 0; i < tam; i++){
@@ -175,7 +177,7 @@ int validaEmail(char email[]){
 }
 //modificada de https://repl.it/@flaviusgorgonio/ValidacaoDeEntradasc#valida.c, feita por @flaviusgoronio e modificada por @GuilheremAngelo.
 int validaAutor(char autor[]){
-  if (strlen(autor) <= 1 || strlen(autor) > 61){
+  if (strlen(autor) <= 1 || strlen(autor) > 60){
     return 0;
   }
   for (int i = 0; autor[i] != '\0'; i++){
@@ -235,4 +237,76 @@ int validaEdicao(char edicao[]){
     }
   }
   return 1;
+}
+
+//Validacão data://
+
+int converteDia(char datap[]){
+  int diaInt[2],conDia;
+  
+  conDia = 0;
+
+  for (int i = 0; i < 2 ; i++) {
+    diaInt[i] = datap[i] - '0';
+    int j = 1;
+    conDia = conDia + diaInt[i] * pow(10,j-i);
+  }
+  return conDia;
+}
+
+int converteMes(char datap[]){
+  int mesInt[4],conMes;
+  
+  conMes = 0;
+  int j = 4;
+
+  for(int i = 3; i < 5; i++){
+      mesInt[i] = datap[i] - '0';
+      conMes = conMes + mesInt[i] * pow(10,j-i);
+  }
+  return conMes;
+}
+
+int converteAno(char datap[]){
+  int anoInt[9],conAno;
+
+  conAno = 0;
+
+  for(int i = 6; i < 10; i++){
+      anoInt[i] = datap[i] - '0';
+      int j = 9;
+      conAno = conAno + anoInt[i] * pow(10, j-i);
+    }
+  return conAno;
+}
+//Feita por Flavius Gorgonio, 2021
+int testaData(int dd, int mm, int aa) {
+  int maiorDia;
+  if (aa < 0 || mm < 1 || mm > 12)
+    return 0;
+  if (mm == 2) {
+    if (bissexto(aa)) 
+      maiorDia = 29;
+    else
+      maiorDia = 28;
+  } else if (mm == 4 || mm == 6 || 
+             mm == 9 || mm == 11) {
+               maiorDia = 30;
+  } else
+    maiorDia = 31;
+
+  if (dd < 1 || dd > maiorDia)
+    return 0;
+
+  return 1;
+}
+
+int bissexto(int aa) {
+  if ((aa % 4 == 0) && (aa % 100 != 0)) {
+    return 1;
+  } else if (aa % 400 == 0) {
+    return 1;
+  } else {
+    return 0;
+  }
 }
