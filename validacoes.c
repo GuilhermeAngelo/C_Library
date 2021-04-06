@@ -247,38 +247,55 @@ int converteDia(char datap[]){
   conDia = 0;
 
   for (int i = 0; i < 2 ; i++) {
-    diaInt[i] = datap[i] - '0';
+    diaInt[i] = datap[i] - 48;
     int j = 1;
-    conDia = conDia + diaInt[i] * pow(10,j-i);
+    conDia = conDia + (diaInt[i] * pow(10,j-i));
   }
   return conDia;
 }
 
 int converteMes(char datap[]){
-  int mesInt[4],conMes;
   
-  conMes = 0;
-  int j = 4;
+  int mesInt[2], conMes = 0;
+  char mes[3];
+  int tam;
+  int k = 0;
 
+  tam = strlen(datap);
   for(int i = 3; i < 5; i++){
-      mesInt[i] = datap[i] - '0';
-      conMes = conMes + mesInt[i] * pow(10,j-i);
+    mes[k] = datap[i];
+    k++;
+    }
+
+  for(int i = 0; i < 2; i++){
+    mesInt[i] = mes[i] - 48;
+    int j = 1;
+    conMes = conMes + mesInt[i] * pow(10,j-i);
   }
   return conMes;
 }
 
 int converteAno(char datap[]){
-  int anoInt[9],conAno;
+  
+  char ano[5];
+  int anoInt[4], conAno = 0;
+  int tam;
+  int k = 0;
+  tam = strlen(datap);
 
-  conAno = 0;
-
-  for(int i = 6; i < 10; i++){
-      anoInt[i] = datap[i] - '0';
-      int j = 9;
-      conAno = conAno + anoInt[i] * pow(10, j-i);
-    }
+  for(int i = 6; i < tam ; i++){
+    ano[k] = datap[i];
+    k++;
+  }
+  
+  for(int i = 0 ; i < strlen(ano); i++){
+    anoInt[i] = ano[i] - 48;
+    int j = strlen(ano) - 1;
+    conAno = conAno + anoInt[i] * pow(10,j-i);
+  }
   return conAno;
 }
+
 //Feita por Flavius Gorgonio, 2021
 int testaData(int dd, int mm, int aa) {
   int maiorDia;

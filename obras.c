@@ -8,6 +8,7 @@ void cadastrarObra(void) {
     char datap[11];
     char edicao[4];
     char isbn[14];
+    int dia,mes,ano, dataValida;
 
     system("cls");
     printf("\n");
@@ -30,8 +31,24 @@ void cadastrarObra(void) {
         getchar();
     }
     printf("//.   DATA DE PUBLICACAO: ");
-    scanf("%[0-9/]",datap);
+    scanf("%[^\n]",datap);
     getchar();
+
+    dia = converteDia(datap);
+    mes = converteMes(datap);
+    ano = converteAno(datap);
+    dataValida = testaData(dia,mes,ano);
+    printf("%d , %d , %d",dia,mes,ano);
+    while(dataValida == 0){
+        printf("//.   DATA INVALIDA, POR FAVOR DIGITE NOVAMENTE.\n\n");
+        printf("//.   DATA DE PUBLICACAO: ");
+        scanf("%[^\n]", datap);
+        getchar();
+        dia = converteDia(datap);
+        mes = converteMes(datap);
+        ano = converteAno(datap);
+        dataValida = testaData(dia,mes,ano);
+    }
     printf("//.   EDICAO: ");
     scanf("%[0-9]",edicao);
     getchar();
