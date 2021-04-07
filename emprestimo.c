@@ -3,17 +3,18 @@
 #include <stdlib.h>
 
 void cadastrarEmp(void) {
+    struct emprestimo
+    {
+        char isbn[14];
+        char dataEmp[11];
+        char dataDevolve[11];
+        char cpf[12];
+        char status;
+    };
     
-    char titulo[31];
-    char autor[51];
-    char edicao[4];
-    char isbn[14];
-    char dias[3];
-    char cpf[12];
-    char nome[61];
-    char usuario[16];
-    char senha[16];
+    typedef struct emprestimo Emp;
 
+    Emp *emp;
     system("cls");
     printf("\n");
     printf("//-------------------------------------------------------------------------------//\n");
@@ -22,34 +23,25 @@ void cadastrarEmp(void) {
     printf("//.                                                                             .//\n");
     printf("//.   CADASTRO DE EMPRESTIMO                                                    .//\n");
     printf("//.                                                                             .//\n");
-    printf("//.   TITULO DA OBRA: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ0-9]",titulo);
+    printf("//.   ISBN DA OBRA: ");
+    scanf("%[^\n]",emp->isbn);
     getchar();
-    printf("//.   AUTOR: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ]",autor);
+    printf("//.   DATA DO EMPRESTIMO: ");
+    scanf("%[^\n]", emp -> dataEmp);
     getchar();
-    printf("//.   ISBN: ");
-    scanf("%[0-9]",isbn);
-    getchar();
-    printf("//.   DIAS: ");
-    scanf("%[0-9]",dias);
+    printf("//.   DATA DE DEVOLUCAO: ");
+    scanf("%[0-9]",emp -> dataDevolve);
     getchar();
     printf("//.                                                                             .//\n");
     printf("//.   CPF - apenas numeros - : ");
-    scanf("%[0-9]",cpf);
+    scanf("%[0-9]",emp -> cpf);
     getchar();
-    while (validaCPF(cpf) == 0){
+    while (validaCPF(emp -> cpf) == 0){
         printf("//.   CPF INVALIDO\n\n");
         printf("//.   CPF - apenas numeros - : ");
-        scanf("%[0-9]", cpf);
+        scanf("%[0-9]", emp -> cpf);
         getchar();
     }
-    printf("//.   NOME DE USUARIO: ");
-    scanf("%[^\n]",usuario);
-    getchar();
-    printf("//.   SENHA: ");
-    scanf("%[^\n]",senha);
-    getchar();
     printf("//.                                                                             .//\n");
     printf("//.-----------------------------------------------------------------------------.//\n");
     printf("//...............................................................................//\n");
