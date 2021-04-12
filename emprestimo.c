@@ -1,20 +1,22 @@
 #include "validacoes.h"
 #include <stdio.h>
 #include <stdlib.h>
-
-void cadastrarEmp(void) {
-    struct emprestimo
-    {
+struct emprestimo{ 
+    
         char isbn[14];
         char dataEmp[11];
         char dataDevolve[11];
         char cpf[12];
         char status;
     };
-    
     typedef struct emprestimo Emp;
 
+void cadastrarEmp(void) {
+
     Emp *emp;
+    emp = (Emp*)malloc(sizeof(Emp));
+    char *cpf;
+
     system("cls");
     printf("\n");
     printf("//-------------------------------------------------------------------------------//\n");
@@ -27,21 +29,23 @@ void cadastrarEmp(void) {
     scanf("%[^\n]",emp->isbn);
     getchar();
     printf("//.   DATA DO EMPRESTIMO: ");
-    scanf("%[^\n]", emp -> dataEmp);
+    scanf("%[^\n]", emp->dataEmp);
     getchar();
     printf("//.   DATA DE DEVOLUCAO: ");
-    scanf("%[0-9]",emp -> dataDevolve);
+    scanf("%[^\n]",emp->dataDevolve);
     getchar();
     printf("//.                                                                             .//\n");
     printf("//.   CPF - apenas numeros - : ");
-    scanf("%[0-9]",emp -> cpf);
+    scanf("%[0-9]",emp->cpf);
     getchar();
-    while (validaCPF(emp -> cpf) == 0){
+    while (validaCPF(emp->cpf) == 0){
         printf("//.   CPF INVALIDO\n\n");
         printf("//.   CPF - apenas numeros - : ");
         scanf("%[0-9]", emp -> cpf);
         getchar();
     }
+    emp->status = '1';
+    free(emp);
     printf("//.                                                                             .//\n");
     printf("//.-----------------------------------------------------------------------------.//\n");
     printf("//...............................................................................//\n");
@@ -49,6 +53,7 @@ void cadastrarEmp(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+
 }
 
 void consultarEmp(void) {

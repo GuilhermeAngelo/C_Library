@@ -2,12 +2,23 @@
 #include <stdlib.h>
 #include "validacoes.h"
 
-void cadastrarObra(void) {
+struct obras
+{
     char titulo[51];
     char autor[51];
     char datap[11];
     char edicao[4];
     char isbn[14];
+    char status;
+};
+typedef struct obras Obras;
+
+
+void cadastrarObra(void) {
+
+    Obras *obra;
+    obra = (Obras*)malloc(sizeof(Obras));
+
     int dia,mes,ano, dataValida;
 
     system("cls");
@@ -19,42 +30,43 @@ void cadastrarObra(void) {
     printf("//.   CADASTRO                                                                  .//\n");
     printf("//.                                                                             .//\n");
     printf("//.   TITULO DA OBRA: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ0-9]",titulo);
+    scanf("%[^\n]",obra->titulo);
     getchar();
     printf("//.   AUTOR: ");
-    scanf("%[^\n]",autor);
+    scanf("%[^\n]",obra->autor);
     getchar();
-    while(validaAutor(autor) == 0){
+    while(validaAutor(obra->autor) == 0){
         printf("//.   O NOME DIGITADO INVALIDO. POR FAVOR, DIGITAR NOVAMENTE.\n\n");
         printf("//.   AUTOR: ");
-        scanf("%[^\n]",autor);
+        scanf("%[^\n]",obra->autor);
         getchar();
     }
     printf("//.   DATA DE PUBLICACAO: ");
-    scanf("%[^\n]",datap);
+    scanf("%[^\n]",obra->datap);
     getchar();
 
-    dia = converteDia(datap);
-    mes = converteMes(datap);
-    ano = converteAno(datap);
+    dia = converteDia(obra->datap);
+    mes = converteMes(obra->datap);
+    ano = converteAno(obra->datap);
     dataValida = testaData(dia,mes,ano);
-    printf("%d , %d , %d",dia,mes,ano);
     while(dataValida == 0){
         printf("//.   DATA INVALIDA, POR FAVOR DIGITE NOVAMENTE.\n\n");
         printf("//.   DATA DE PUBLICACAO: ");
-        scanf("%[^\n]", datap);
+        scanf("%[^\n]", obra->datap);
         getchar();
-        dia = converteDia(datap);
-        mes = converteMes(datap);
-        ano = converteAno(datap);
+        dia = converteDia(obra->datap);
+        mes = converteMes(obra->datap);
+        ano = converteAno(obra->datap);
         dataValida = testaData(dia,mes,ano);
     }
     printf("//.   EDICAO: ");
-    scanf("%[0-9]",edicao);
+    scanf("%[0-9]",obra->edicao);
     getchar();
     printf("//.   ISBN: ");
-    scanf("%[0-9]",titulo);
+    scanf("%[0-9]",obra->titulo);
     getchar();
+    obra->status = '1';
+    free(obra);
     printf("//.                                                                             .//\n");
     printf("//.-----------------------------------------------------------------------------.//\n");
     printf("//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//\n");

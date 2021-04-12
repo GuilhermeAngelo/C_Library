@@ -2,12 +2,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void cadastrarUser(void) {
+struct usuario
+{
     char nome[61];
     char cpf[12];
     char email[61];
     char usuario[16];
     char senha[16];
+    char status;
+    
+};
+
+typedef struct usuario Usuario;
+
+void cadastrarUser(void) {
+    Usuario *user;
+
+    user = (Usuario*)malloc(sizeof(Usuario));
 
     system("cls");
     printf("\n");
@@ -18,50 +29,52 @@ void cadastrarUser(void) {
     printf("//.   CADASTRO                                                                  .//\n");
     printf("//.                                                                             .//\n");
     printf("//.   NOME COMPLETO: ");
-    scanf("%[^\n]",nome);
+    scanf("%[^\n]",user->nome);
     getchar();
-    while(validaNome(nome) == 0){
+    while(validaNome(user->nome) == 0){
         printf("//.   NOME INVALIDO.\n\n");
         printf("//.   NOME COMPLETO: ");
-        scanf("%[^\n]",nome);
+        scanf("%[^\n]",user->nome);
         getchar();
     }
     printf("//.   CPF - apenas numeros - : ");
-    scanf("%[0-9]",cpf);
+    scanf("%[0-9]",user->cpf);
     getchar();
-    while (validaCPF(cpf) == 0){
+    while (validaCPF(user->cpf) == 0){
         printf("//.   CPF INVALIDO.\n\n");
         printf("//.   CPF - apenas numeros - : ");
-        scanf("%[0-9]", cpf);
+        scanf("%[0-9]", user->cpf);
         getchar();
     }
     printf("//.   EMAIL: ");
-    scanf("%[^\n]",email);
+    scanf("%[^\n]",user->email);
     getchar();
-    while(validaEmail(email) == 0) {
+    while(validaEmail(user->email) == 0) {
         printf("//.   EMAIL INVALIDO.\n\n");
         printf("//.   EMAIL: ");
-        scanf("%[^\n]",email);
+        scanf("%[^\n]",user->email);
         getchar();
     }
-    printf("//.   NOME DE USUARIO - MINIMO 4 CARACTERES - : ");
-    scanf("%[^\n]",usuario);
+    printf("//.   LOGIN - MINIMO 4 CARACTERES - : ");
+    scanf("%[^\n]",user->usuario);
     getchar();
-    while (validaUsuario(usuario) == 0) {
-        printf(".//   NOME DE USUARIO INVALIDO.\n\n");
-        printf(".//   NOME DE USUARIO - MINIMO 4 CARACTERES -: ");
-        scanf("%[^\n]",usuario);
+    while (validaUsuario(user->usuario) == 0) {
+        printf(".//   LOGIN INVALIDO.\n\n");
+        printf(".//   LOGIN - MINIMO 4 CARACTERES -: ");
+        scanf("%[^\n]",user->usuario);
         getchar();
     }
     printf("//.   SENHA - MINIMO 4 CARACTERES - : ");
-    scanf("%[^\n]",senha);
+    scanf("%[^\n]",user->senha);
     getchar();
-    while(validaSenha(senha) == 0){
+    while(validaSenha(user->senha) == 0){
         printf(".//   SENHA INVALIDA.\n\n");
         printf("//.   SENHA - MINIMO 4 CARACTERES - : ");
-        scanf("%[^\n]",senha);
+        scanf("%[^\n]",user->senha);
         getchar();
     }
+    user->status = '1';
+    free(user);
     printf("//.                                                                             .//\n");
     printf("//-------------------------------------------------------------------------------//\n");
     printf("//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&//\n");
@@ -133,6 +146,7 @@ void atualizarNome(void){
     char nomeA[61];
     char nomeN[61];
     char senha[16];
+    
     printf("//===============================================================================//\n");
     printf("//&&&&&&&&&&&&&&&&&&&&&&|      ATUALIZACAO DE NOME       |&&&&&&&&&&&&&&&&&&&&&&&//\n");
     printf("//##############################################################################.//\n");
