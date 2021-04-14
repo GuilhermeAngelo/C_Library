@@ -1,19 +1,9 @@
 #include "validacoes.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include "usuario.h"
 
-struct usuario
-{
-    char nome[61];
-    char cpf[12];
-    char email[61];
-    char usuario[16];
-    char senha[16];
-    char status;
-    
-};
-
-typedef struct usuario Usuario;
 
 void cadastrarUser(void) {
     Usuario *user;
@@ -74,6 +64,7 @@ void cadastrarUser(void) {
         getchar();
     }
     user->status = '1';
+    salvarUser(user);
     free(user);
     printf("//.                                                                             .//\n");
     printf("//-------------------------------------------------------------------------------//\n");
@@ -84,8 +75,13 @@ void cadastrarUser(void) {
     getchar();
 }
 
+
 void consultarUser(void) {
-    char consulta[61];
+    char cpf[12];
+    
+    Usuario* busca;
+
+    busca = (Usuario*)malloc(sizeof(Usuario));
 
     system("cls");
     printf("\n");
@@ -95,15 +91,19 @@ void consultarUser(void) {
     printf("//.                                                                             .//\n");
     printf("//.   PESQUISA                                                                  .//\n");
     printf("//.                                                                             .//\n");
-    printf("//.   DIGITE O NOME DO USUARIO: ");
-    scanf("%[^\n]",consulta);
-    while(validaNome(consulta) == 0){
-        printf("//.   NOME INVALIDO.\n\n");
-        printf("//.   NOME COMPLETO: ");
-        scanf("%[^\n]",consulta);
+    printf("//.   DIGITE O CPF DO USUARIO: ");
+    scanf("%[^\n]",cpf);
+    getchar();
+    while(validaCPF(cpf) == 0){
+        printf("//.   CPF INVALIDO.\n\n");
+        printf("//.   CPF COMPLETO: ");
+        scanf("%[^\n]",cpf);
         getchar();
     }
-    getchar();
+    busca = buscarUser(cpf);
+    exibirUser(busca);
+    free(busca);
+
     printf("//.                                                                             .//\n");
     printf("//-------------------------------------------------------------------------------//\n");
     printf("//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&//\n");
@@ -388,4 +388,80 @@ void excluirUser(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+}
+//funções de arquivos relacionadas aos usuáios
+
+void salvarUser(Usuario* user){
+    FILE *fUser;
+    fUser = fopen("Usuarios.dat","ab");
+    if(fUser == NULL){
+        printf("Ops ocorreu um erro na abertura do aquivo\n\n");
+        printf("Fechando o programa...");
+        exit(1);
+
+    }
+    fwrite(user,sizeof(Usuario),1,fUser);
+    fclose(fUser);
+
+}
+
+Usuario* buscarUser(char *cpf){
+    
+    FILE *fUser;
+    Usuario* usuario;
+
+    usuario = (Usuario*)malloc(sizeof(Usuario));
+
+    fUser = fopen("Usuarios.dat","rb");
+    if(fUser == NULL){
+        printf("Nao foi possivel ler o aquivo\n\n");
+        printf("Fechando o programa...");
+        exit(1);
+    }
+    while(!feof(fUser)){
+        fread(usuario,sizeof(Usuario),1, fUser);
+        if(strcmp(usuario->cpf, cpf) == 0){
+            fclose(fUser);
+            return usuario;
+        }
+    }
+    fclose(fUser);
+    return NULL;
+
+}
+
+void exibirUser(Usuario* user){
+    if(user == NULL){
+        printf("\n\nO ALUNO NÃO EXISTE.");
+    } else{
+        printf("\n\n-------------------USUARIO CADASTRADO-------------------\n\n");
+        printf("   NOME: %s\n", user->nome);
+        printf("   CPF: %s\n", user->cpf);
+        printf("   EMAIL: %s\n", user->email);
+        printf("   LOGIN: %s\n", user->usuario);
+        if(user->status == '1'){
+        printf("STATUS: %c", user->status);
+        
+        }
+    }
+    free(user);
+}
+
+void atualiza(Usuario* Userlido){
+    
+    FILE *fUser;
+    Usuario *userArq;
+    char nome[61];
+
+    if(Userlido == NULL){
+        printf("\n\nO USUARIO NÃO EXISTE");
+    } else{
+        userArq = (Usuario*)malloc(sizeof(Usuario));
+        fUser = fopen("Usuarios.dat", "r+b");
+        if(fUser == NULL){
+            printf("Não foi possível abrir o arquivo.\n\n");
+            printf("Fechando o programa...");
+            exit(1);
+        }
+    }
 }

@@ -1,18 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "validacoes.h"
-
-struct obras
-{
-    char titulo[51];
-    char autor[51];
-    char datap[11];
-    char edicao[4];
-    char isbn[14];
-    char status;
-};
-typedef struct obras Obras;
-
+#include"obras.h"
 
 void cadastrarObra(void) {
 
@@ -66,6 +55,7 @@ void cadastrarObra(void) {
     scanf("%[0-9]",obra->titulo);
     getchar();
     obra->status = '1';
+    salvarObra(obra);
     free(obra);
     printf("//.                                                                             .//\n");
     printf("//.-----------------------------------------------------------------------------.//\n");
@@ -287,4 +277,17 @@ void excluirObra(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+}
+
+
+void salvarObra(Obras *obra){
+    FILE *fObra;
+    fObra = fopen("Obras.dat","ab");
+    if(fObra == NULL){
+        printf("Ops ocorreu um erro na abertura do aquivo\n\n");
+        printf("Fechando o programa...");
+        exit(1);
+    }
+    fwrite(obra,sizeof(Obras),1,fObra);
+    fclose(fObra);
 }

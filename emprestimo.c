@@ -15,7 +15,6 @@ void cadastrarEmp(void) {
 
     Emp *emp;
     emp = (Emp*)malloc(sizeof(Emp));
-    char *cpf;
 
     system("cls");
     printf("\n");

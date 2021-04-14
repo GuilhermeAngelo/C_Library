@@ -1,3 +1,15 @@
+struct obras
+{
+    char titulo[51];
+    char autor[51];
+    char datap[11];
+    char edicao[4];
+    char isbn[14];
+    char status;
+};
+
+typedef struct obras Obras;
+
 // Cadastra uma determinada obra
 void cadastrarObra(void);
 
@@ -24,3 +36,5 @@ void atualizarIsbn(void);
 
 //Exclui uma determinada obra
 void excluirObra(void);
+
+void salvarObra(Obras*);
