@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include "validacoes.h"
 #include"obras.h"
@@ -52,7 +53,7 @@ void cadastrarObra(void) {
     scanf("%[0-9]",obra->edicao);
     getchar();
     printf("//.   ISBN: ");
-    scanf("%[0-9]",obra->titulo);
+    scanf("%[0-9]",obra->isbn);
     getchar();
     obra->status = '1';
     salvarObra(obra);
@@ -67,7 +68,10 @@ void cadastrarObra(void) {
 }
 
 void consultarObra(void) {
-    char pesquisa[50];
+    char pesquisa[14];
+    Obras* busca;
+
+    busca = (Obras*)malloc(sizeof(Obras));
 
     system("cls");
     printf("\n");
@@ -77,9 +81,12 @@ void consultarObra(void) {
     printf("//.                                                                             .//\n");
     printf("//.   PESQUISA                                                                  .//\n");
     printf("//.                                                                             .//\n");
-    printf("//.   NOME OU ISBN DA OBRA : ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ0-9]",pesquisa);
+    printf("//.   ISBN DA OBRA : ");
+    scanf("%[0-9]",pesquisa);
     getchar();
+    busca = buscarObra(pesquisa);
+    exibirObra(busca);
+    free(busca);
     printf("//.                                                                             .//\n");
     printf("//-------------------------------------------------------------------------------//\n");
     printf("//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//\n");
@@ -259,6 +266,9 @@ void atualizarIsbn(void){
 void excluirObra(void) {
     char isbn[14];
 
+    Obras* busca;
+    busca = (Obras*)malloc(sizeof(Obras));
+
     system("cls");
     printf("\n");
     printf("//-------------------------------------------------------------------------------//\n");
@@ -270,6 +280,9 @@ void excluirObra(void) {
     printf("//.   ISBN DA OBRA : ");
     scanf("%[0-9]",isbn);
     getchar();
+    busca = buscarObra(isbn);
+    delObra(busca,isbn);
+    free(busca);
     printf("//.                                                                             .//\n");
     printf("//-------------------------------------------------------------------------------//\n");
     printf("//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//\n");
@@ -279,6 +292,7 @@ void excluirObra(void) {
     getchar();
 }
 
+//Adaptada de @flaviusgoronio//
 
 void salvarObra(Obras *obra){
     FILE *fObra;
@@ -290,4 +304,75 @@ void salvarObra(Obras *obra){
     }
     fwrite(obra,sizeof(Obras),1,fObra);
     fclose(fObra);
+}
+
+//Adaptada de @flaviusgoronio//
+Obras* buscarObra(char *isbn){
+    
+    FILE *fObra;
+    Obras* obra;
+
+    obra = (Obras*)malloc(sizeof(Obras));
+
+    fObra = fopen("Obras.dat","rb");
+    if(fObra == NULL){
+        printf("Nao foi possivel ler o aquivo\n\n");
+        printf("Fechando o programa...");
+        exit(1);
+    }
+    while(!feof(fObra)){
+        fread(obra,sizeof(Obras),1,fObra);
+        if(strcmp(obra->isbn, isbn) == 0 && (obra->status != 'x')){
+            fclose(fObra);
+            return obra;
+        }
+    }
+    fclose(fObra);
+    return NULL;
+
+}
+//Adaptada de @flaviusgoronio//
+void exibirObra(Obras* obra){
+    if(obra == NULL){
+        printf("\n\nA OBRA NAO EXISTE.\n");
+    } else{
+        printf("\n\n-------------------USUARIO CADASTRADO---------------------\n\n");
+        printf("|  TITULO: %s                                                   \n", obra->titulo);
+        printf("|  AUTOR: %s                                                    \n", obra->autor);
+        printf("|  DATA DE PUBLICACAO: %s                                                  \n", obra->datap);
+        printf("|  EDICAO: %s                                                  \n", obra->edicao);
+        printf("|  ISBN: %s                                                  \n", obra->isbn);
+        printf("|  STATUS: %c                                                 \n", obra->status);
+        printf("\n----------------------------------------------------------\n\n");
+        
+        
+    }
+    free(obra);
+}
+//Adaptada das funções anteriores feitas por @flaviusgoronio//
+void delObra(Obras* obraLida, char*isbn){
+    FILE *fObra;
+    int achou = 0;
+
+    if(obraLida == NULL){
+        printf("\n\nA OBRA NAO EXISTE\n");
+    } else {
+        fObra = fopen("Obras.dat", "r+b");
+
+        if(fObra == NULL){
+            printf("Não foi possível abrir o arquivo.\n\n");
+            printf("Fechando o programa...");
+            exit(1);
+        }
+        while(!feof(fObra)){
+            if(strcmp(obraLida->isbn,isbn) == 0 && (obraLida->status != 'x') ){
+                achou = 1;
+                obraLida->status = 'x';
+                fseek(fObra, -1*sizeof(Obras), SEEK_CUR);
+                fwrite(obraLida,sizeof(Obras),1,fObra);
+                break;
+            } free(obraLida);
+        }
+        fclose(fObra); 
+    }
 }

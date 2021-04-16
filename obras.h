@@ -38,3 +38,9 @@ void atualizarIsbn(void);
 void excluirObra(void);
 
 void salvarObra(Obras*);
+
+Obras* buscarObra(char*);
+
+void exibirObra(Obras*);
+
+void delObra(Obras*,char*);

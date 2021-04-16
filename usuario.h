@@ -42,3 +42,13 @@ void salvarUser(Usuario*);
 Usuario* buscarUser(char*);
 
 void exibirUser(Usuario*);
+
+void atualiza(Usuario*,char*);
+
+void delUser(Usuario*, char*);
+
+void atualizaEmail(Usuario*, char*);
+
+void atualizaLogin(Usuario*, char*);
+
+void atualizaSenha(Usuario*, char*);

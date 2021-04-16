@@ -1,15 +1,8 @@
 #include "validacoes.h"
 #include <stdio.h>
 #include <stdlib.h>
-struct emprestimo{ 
-    
-        char isbn[14];
-        char dataEmp[11];
-        char dataDevolve[11];
-        char cpf[12];
-        char status;
-    };
-    typedef struct emprestimo Emp;
+#include"emprestimo.h"
+#include <string.h>
 
 void cadastrarEmp(void) {
 
@@ -35,7 +28,7 @@ void cadastrarEmp(void) {
     getchar();
     printf("//.                                                                             .//\n");
     printf("//.   CPF - apenas numeros - : ");
-    scanf("%[0-9]",emp->cpf);
+    scanf("%[^\n]",emp->cpf);
     getchar();
     while (validaCPF(emp->cpf) == 0){
         printf("//.   CPF INVALIDO\n\n");
@@ -44,6 +37,7 @@ void cadastrarEmp(void) {
         getchar();
     }
     emp->status = '1';
+    salvarEmp(emp);
     free(emp);
     printf("//.                                                                             .//\n");
     printf("//.-----------------------------------------------------------------------------.//\n");
@@ -57,6 +51,10 @@ void cadastrarEmp(void) {
 
 void consultarEmp(void) {
     char cpf[12];
+    Emp *busca;
+
+    busca = (Emp*)malloc(sizeof(Emp));
+
     system("cls");
     printf("\n");
     printf("//-------------------------------------------------------------------------------//\n");
@@ -66,15 +64,17 @@ void consultarEmp(void) {
     printf("//.   PESQUISA                                                                  .//\n");
     printf("//.                                                                             .//\n");
     printf("//.   CPF - apenas numeros - : ");
-    scanf("%[0-9]",cpf);
+    scanf("%[^\n]",cpf);
     getchar();
     while (validaCPF(cpf) == 0){
         printf("//.   CPF INVALIDO\n\n");
         printf("//.   CPF - apenas numeros - : ");
-        scanf("%[0-9]", cpf);
+        scanf("%[^\n]", cpf);
         getchar();
     }
-    getchar();
+    busca = buscaEmp(cpf);
+    exibirEmp(busca);
+    free(busca);
     printf("//.                                                                             .//\n");
     printf("//-------------------------------------------------------------------------------//\n");
     printf("//...............................................................................//\n");
@@ -86,18 +86,11 @@ void consultarEmp(void) {
 
 char atualizarEmp(void) {
     
-    // Esse menu vai ser utilizado para quem já tem empréstimo e quer alugar novamente.
-    //pois assim futuramente colocarei um contador para contabilizar a qndt de clientes e para evitar que o mesmo cliente seja contabilizado duas vezes.
-
-    char titulo[31];
-    char autor[51];
-    char edicao[4];
     char isbn[14];
-    char dias[3];
+    char dataEmp[11];
+    char dataDevolve[11];
     char cpf[12];
-    char nome[61];
-    char usuario[16];
-    char senha[16];
+    //armazenar em uma estrutura
 
     system("cls");
     printf("\n");
@@ -107,17 +100,14 @@ char atualizarEmp(void) {
     printf("//.                                                                             .//\n");
     printf("//.   ATUALIZAÇÃO DE EMPRESTIMO                                                 .//\n");
     printf("//.                                                                             .//\n");
-    printf("//.   TITULO DA OBRA: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ0-9]",titulo);
-    getchar();
-    printf("//.   AUTOR: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ]",autor);
-    getchar();
     printf("//.   ISBN: ");
     scanf("%[0-9]",isbn);
     getchar();
-    printf("//.   DIAS: ");
-    scanf("%[0-9]",dias);
+    printf("//.   DATA DE EMPRESTIMO: ");
+    scanf("%[0-9]",dataEmp);
+    getchar();
+    printf("//.   DATA DE DEVOLUCAO: ");
+    scanf("%[0-9]",dataDevolve);
     getchar();
     printf("//.                                                                             .//\n");
     printf("//.   CPF - apenas numeros - : ");
@@ -129,13 +119,6 @@ char atualizarEmp(void) {
         scanf("%[0-9]", cpf);
         getchar();
     }
-    getchar();
-    printf("//.   NOME DE USUARIO: ");
-    scanf("%[^\n]",usuario);
-    getchar();
-    printf("//.   SENHA: ");
-    scanf("%[^\n]",senha);
-    getchar();
     printf("//.                                                                             .//\n");
     printf("//.-----------------------------------------------------------------------------.//\n");
     printf("//...............................................................................//\n");
@@ -175,15 +158,13 @@ void devolverEmp(void) {
     printf("//.   ISBN: ");
     scanf("%[0-9]",isbn);
     getchar();
-    printf("//.   DIAS USANDO: ");// voce deve fornecer um numero, caso contrário o programa irá ficar solicitando ele
+    printf("//.   DIAS USANDO: ");
     scanf("%d",dias);
     getchar();
     printf("//.   DIAS ALUGADOS: ");
     scanf("%d",diasAlugado);
     getchar();
-    multa = (dias - diasAlugado)*3;// vou fazer a função ainda(pois existiria uma multa negativa).Varei a validação quando chegar a semana.//
     printf("//.                                                                             .//\n");
-    printf("//.   MULTA: %d                                                                 .//\n",&multa);
     printf("//.                                                                             .//\n");
     printf("//-------------------------------------------------------------------------------//\n");
     printf("//...............................................................................//\n");
@@ -191,4 +172,59 @@ void devolverEmp(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+}
+
+void salvarEmp(Emp* emp){
+    FILE *fEmp;
+    fEmp = fopen("Emprestimos.dat","ab");
+    if(fEmp == NULL){
+        printf("Ops ocorreu um erro na abertura do aquivo\n\n");
+        printf("Fechando o programa...");
+        exit(1);
+
+    }
+    fwrite(emp,sizeof(Emp),1,fEmp);
+    fclose(fEmp);
+
+}
+
+void exibirEmp(Emp* emprestimo){
+    if(emprestimo == NULL){
+        printf("\n\nO EMPRESTIMO NAO EXISTE.\n");
+    } else{
+        printf("\n\n-------------------EMPRESTIMO CADASTRADO---------------------\n\n");
+        printf("|  ISBN: %s                                                   \n", emprestimo->isbn);
+        printf("|  CPF: %s                                                    \n", emprestimo->cpf);
+        printf("|  DATA DE EMPRESTIMO: %s                                                  \n",emprestimo->dataEmp);
+        printf("|  DATA DE DEVOLUCAO: %s                                                  \n", emprestimo->dataDevolve);
+        printf("|  STATUS: %c                                                 \n", emprestimo->status);
+        printf("\n----------------------------------------------------------\n\n");
+        
+        
+    }
+    free(emprestimo);
+}
+
+Emp* buscaEmp(char* cpf){
+    
+    FILE *fEmp;
+    Emp *emprestimo;
+
+    emprestimo = (Emp*)malloc(sizeof(Emp));
+
+    fEmp = fopen("Emprestimos.dat", "rb");
+
+    if(fEmp == NULL){
+        printf("Não foi possível ler o arquivo.\n\n");
+        printf("Fechando o arquivo...");
+        exit(1);
+    }
+    while (!feof(fEmp)){
+        fread(emprestimo,sizeof(Emp),1,fEmp);
+        if(strcmp(emprestimo->cpf,cpf) == 0 && (emprestimo->status != '0')){
+            fclose(fEmp);
+            return emprestimo;
+        }
+    } fclose(fEmp);
+    return NULL;
 }

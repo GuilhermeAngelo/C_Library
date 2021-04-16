@@ -80,7 +80,6 @@ void consultarUser(void) {
     char cpf[12];
     
     Usuario* busca;
-
     busca = (Usuario*)malloc(sizeof(Usuario));
 
     system("cls");
@@ -103,7 +102,6 @@ void consultarUser(void) {
     busca = buscarUser(cpf);
     exibirUser(busca);
     free(busca);
-
     printf("//.                                                                             .//\n");
     printf("//-------------------------------------------------------------------------------//\n");
     printf("//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&//\n");
@@ -128,7 +126,7 @@ char menuAtuUser(void) {
     printf("//.   N - NOME                                                                  .//\n");
     printf("//.   C - CPF                                                                   .//\n");
     printf("//.   E - EMAIL                                                                 .//\n");
-    printf("//.   U - NOME DE USUARIO                                                       .//\n");
+    printf("//.   U - LOGIN                                                                 .//\n");
     printf("//.   S - SENHA                                                                 .//\n");
     printf("//.   0 - SAIR                                                                  .//\n");
     printf("//.                                                                             .//\n");
@@ -143,44 +141,30 @@ char menuAtuUser(void) {
 
 void atualizarNome(void){
     system("cls");
-    char nomeA[61];
-    char nomeN[61];
+    char cpf[12];
     char senha[16];
+    Usuario* busca;
     
+    busca = (Usuario*)malloc(sizeof(Usuario));
+
     printf("//===============================================================================//\n");
     printf("//&&&&&&&&&&&&&&&&&&&&&&|      ATUALIZACAO DE NOME       |&&&&&&&&&&&&&&&&&&&&&&&//\n");
     printf("//##############################################################################.//\n");
     printf("//.                                                                             .//\n");
     printf("//.   ATUALIZACAO                                                               .//\n");
     printf("//.                                                                             .//\n");
-    printf("//.   DIGITE O NOME ANTIGO: ");
-    scanf("%[^\n]",nomeA);
+    printf("//.   DIGITE O CPF: ");
+    scanf("%[0-9]",cpf);
     getchar();
-    while(validaNome(nomeA) == 0){
-        printf("//.   NOME INVALIDO.\n\n");
-        printf("//.   DIGITE O SEU NOME: ");
-        scanf("%[^\n]");
+    while(validaCPF(cpf) == 0){
+        printf("//.   CPF INVALIDO.\n\n");
+        printf("//.   DIGITE O SEU CPF: ");
+        scanf("%[0-9]");
         getchar();
     }
-    printf("//.   SENHA: ");
-    scanf("%[^\n]",senha);
-    getchar();
-    while (validaSenha(senha) == 0) {
-        printf("SENHA INVALIDA.\n\n");
-        printf("DIGITE A SENHA - MINIMO 4 CARACTERES -: ");
-        scanf("%[^\n]");
-        getchar();
-    }
-    
-    printf("//.   DIGITE O NOME NOVO: ");
-    scanf("%[^\n]",nomeN);
-    getchar();
-    while(validaNome(nomeN) == 0){
-        printf("//. NOME INVALIDO\n\n");
-        printf("//. DIGITE O SEU NOME");
-        scanf("%[^\n]");
-        getchar();
-    }
+    busca = buscarUser(cpf);
+    atualiza(busca,cpf);
+    free(busca);
     printf("//.                                                                             .//\n");
     printf("//###############################################################################//\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
@@ -234,9 +218,10 @@ void atualizarCpf(void){
 
 void atualizarEmail(void){
     
-    char emailA[61];
-    char emailN[61];
-    char senha[16];
+    char cpf[12];
+    Usuario* busca;
+    busca = (Usuario*)malloc(sizeof(Usuario));
+
     system("cls");
     printf("//===============================================================================//\n");
     printf("//&&&&&&&&&&&&&&&&&&&&&&|       ATUALIZACAO DE EMAIL       |&&&&&&&&&&&&&&&&&&&&&&&//\n");
@@ -244,33 +229,18 @@ void atualizarEmail(void){
     printf("//.                                                                             .//\n");
     printf("//.   ATUALIZACAO                                                               .//\n");
     printf("//.                                                                             .//\n");
-    printf("//.   DIGITE O EMAIL RESGISTRADO: ");
-    scanf("%[^\n]",emailA);
+    printf("//.   DIGITE O CPF: ");
+    scanf("%[^\n]",cpf);
     getchar();
-    while(validaEmail(emailA) == 0) {
+    while(validaCPF(cpf) == 0) {
         printf("//.   EMAIL INVALIDO.\n\n");
         printf("//.   EMAIL: ");
-        scanf("%[^\n]",emailA);
+        scanf("%[^\n]",cpf);
         getchar();
     }
-    printf("//.   SENHA: ");
-    scanf("%[A-Za-z0-9]",senha);
-    getchar();
-    while (validaSenha(senha) == 0) {
-        printf("SENHA INVALIDA.\n\n");
-        printf("DIGITE A SENHA - MINIMO 4 CARACTERES -: ");
-        scanf("%[^\n]");
-        getchar();
-    }
-    printf("//.   DIGITE O NOVO EMAIL: ");
-    scanf("%[^\n]",emailN);
-    getchar();
-    while(validaEmail(emailN) == 0) {
-        printf("//.   EMAIL INVALIDO.\n\n");
-        printf("//.   EMAIL: ");
-        scanf("%[^\n]",emailN);
-        getchar();
-    }
+    busca = buscarUser(cpf);
+    atualizaEmail(busca,cpf);
+    free(busca);
     printf("//.                                                                             .//\n");
     printf("//###############################################################################//\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
@@ -280,42 +250,28 @@ void atualizarEmail(void){
 
 void atualizarNomeU(void){
     system("cls");
-    char usuarioA[16];
-    char usuarioN[16];
-    char senha[16];
+    char cpf[12];
+    Usuario* busca;
+    busca = (Usuario*)malloc(sizeof(Usuario));
+
     printf("//===============================================================================//\n");
-    printf("//&&&&&&&&&&&&&&&&&&&&&&|     ATUALIZACAO  NOME_USU      |&&&&&&&&&&&&&&&&&&&&&&&//\n");
+    printf("//&&&&&&&&&&&&&&&&&&&&&&|     ATUALIZACAO DE LOGIN       |&&&&&&&&&&&&&&&&&&&&&&&//\n");
     printf("//##############################################################################.//\n");
     printf("//.                                                                             .//\n");
     printf("//.   ATUALIZACAO                                                               .//\n");
     printf("//.                                                                             .//\n");
-    printf("//.   DIGITE O NOME DE USUARIO ANTIGO: ");
-    scanf("%[^\n]",usuarioA);
+    printf("//.   DIGITE O CPF: ");
+    scanf("%[^\n]",cpf);
     getchar();
-    while (validaUsuario(usuarioA) == 0) {
-        printf(".//   NOME DE USUARIO INVALIDO.\n\n");
-        printf(".//   NOME DE USUARIO - MINIMO 4 CARACTERES -: ");
-        scanf("%[^\n]",usuarioA);
+    while (validaCPF(cpf) == 0) {
+        printf(".//   CPF INVALIDO.\n\n");
+        printf(".//   CPF: ");
+        scanf("%[^\n]",cpf);
         getchar();
     }
-    printf("//.   SENHA: ");
-    scanf("%[^\n]",senha);
-    getchar();
-    while (validaSenha(senha) == 0) {
-        printf("SENHA INVALIDA.\n\n");
-        printf("DIGITE A SENHA - MINIMO 4 CARACTERES -: ");
-        scanf("%[^\n]");
-        getchar();
-    }
-    printf("//.   DIGITE O NOVO NOME DE USUARIO: ");
-    scanf("%[^\n]",usuarioN);
-    getchar();
-    while(validaUsuario(usuarioN) == 0){
-        printf(".//   NOME DE USUARIO INVALIDO.\n\n");
-        printf(".//   NOME DE USUARIO - MINIMO 4 CARACTERES -: ");
-        scanf("%[^\n]",usuarioN);
-        getchar();
-    }
+    busca = buscarUser(cpf);
+    atualizaLogin(busca,cpf);
+    free(busca);
     printf("//.                                                                             .//\n");
     printf("//###############################################################################//\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
@@ -324,9 +280,10 @@ void atualizarNomeU(void){
 }
 
 void atualizarSenha(void){
-    
+    Usuario* busca;
+    busca = (Usuario*)malloc(sizeof(Usuario));
+
     system("cls");
-    char senhaN[16];
     char cpf[12];
     printf("//===============================================================================//\n");
     printf("//&&&&&&&&&&&&&&&&&&&&&&|      ATUALIZACAO DE SENHA      |&&&&&&&&&&&&&&&&&&&&&&&//\n");
@@ -343,15 +300,9 @@ void atualizarSenha(void){
         scanf("%[0-9]", cpf);
         getchar();
     }
-    printf("//.   SENHA NOVA: ");
-    scanf("%[^\n]", senhaN);
-    getchar();
-    while (validaSenha(senhaN) == 0) {
-        printf("SENHA INVALIDA.\n\n");
-        printf("DIGITE A SENHA - MINIMO 4 CARACTERES -: ");
-        scanf("%[^\n]");
-        getchar();
-    }
+    busca = buscarUser(cpf);
+    atualizaSenha(busca,cpf);
+    free(busca);
     printf("//.                                                                             .//\n");
     printf("//###############################################################################//\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
@@ -360,8 +311,12 @@ void atualizarSenha(void){
 }
 
 void excluirUser(void) {
-    system("cls");
     char cpf[12];
+
+    Usuario* busca;
+
+    busca = (Usuario*)malloc(sizeof(Usuario));
+
     system("cls");
     printf("\n");
     printf("//===============================================================================//\n");
@@ -381,6 +336,9 @@ void excluirUser(void) {
         scanf("%[0-9]", cpf);
         getchar();
     }
+    busca = buscarUser(cpf);
+    delUser(busca,cpf);
+    free(busca);
     printf("//.                                                                             .//\n");
     printf("//###############################################################################//\n");
     printf("//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&//\n");
@@ -420,7 +378,7 @@ Usuario* buscarUser(char *cpf){
     }
     while(!feof(fUser)){
         fread(usuario,sizeof(Usuario),1, fUser);
-        if(strcmp(usuario->cpf, cpf) == 0){
+        if(strcmp(usuario->cpf, cpf) == 0 && (usuario->status != 'x') ){
             fclose(fUser);
             return usuario;
         }
@@ -432,36 +390,184 @@ Usuario* buscarUser(char *cpf){
 
 void exibirUser(Usuario* user){
     if(user == NULL){
-        printf("\n\nO ALUNO NÃO EXISTE.");
+        printf("\n\nO USUARIO NAO EXISTE.\n");
     } else{
-        printf("\n\n-------------------USUARIO CADASTRADO-------------------\n\n");
-        printf("   NOME: %s\n", user->nome);
-        printf("   CPF: %s\n", user->cpf);
-        printf("   EMAIL: %s\n", user->email);
-        printf("   LOGIN: %s\n", user->usuario);
+        printf("\n\n-------------------USUARIO CADASTRADO---------------------\n\n");
+        printf("|  NOME: %s                                                   \n", user->nome);
+        printf("|  CPF: %s                                                    \n", user->cpf);
+        printf("|  EMAIL: %s                                                  \n", user->email);
+        printf("|  LOGIN: %s                                                  \n", user->usuario);
         if(user->status == '1'){
-        printf("STATUS: %c", user->status);
+        printf("|  STATUS: %c                                                 \n", user->status);
+        printf("\n----------------------------------------------------------\n\n");
         
         }
     }
     free(user);
 }
 
-void atualiza(Usuario* Userlido){
-    
+void atualiza(Usuario* userLido, char*cpf){
     FILE *fUser;
-    Usuario *userArq;
-    char nome[61];
+    char nomeN[61];
+    int achou = 0;
 
-    if(Userlido == NULL){
-        printf("\n\nO USUARIO NÃO EXISTE");
-    } else{
-        userArq = (Usuario*)malloc(sizeof(Usuario));
+    if(userLido == NULL){
+        printf("\n\nO USUARIO NAO EXISTE\n");
+    } else {
         fUser = fopen("Usuarios.dat", "r+b");
+
         if(fUser == NULL){
             printf("Não foi possível abrir o arquivo.\n\n");
             printf("Fechando o programa...");
             exit(1);
         }
+        while(!feof(fUser)){
+            if(strcmp(userLido->cpf,cpf) == 0 && (userLido ->status != 'x') ){
+                achou = 1;
+                printf("DIGITE O NOVO NOME: ");
+                scanf("%[^\n]",nomeN);
+                getchar();
+                strcpy(userLido->nome, nomeN);
+                fseek(fUser, -1*sizeof(Usuario), SEEK_CUR);
+                fwrite(userLido,sizeof(Usuario),1,fUser);
+                break;
+            } free(userLido);
+        } if(achou == 0){
+            printf("\n\nUsuario nao foi encontrado");
+            fclose(fUser);
+            }
+        fclose(fUser); 
+    }
+}
+
+void delUser(Usuario* userLido, char*cpf){
+    FILE *fUser;
+    int achou = 0;
+
+    if(userLido == NULL){
+        printf("\n\nO USUARIO NAO EXISTE\n");
+    } else {
+        fUser = fopen("Usuarios.dat", "r+b");
+
+        if(fUser == NULL){
+            printf("Não foi possível abrir o arquivo.\n\n");
+            printf("Fechando o programa...");
+            exit(1);
+        }
+        while(!feof(fUser)){
+            if(strcmp(userLido->cpf,cpf) == 0 && (userLido->status != 'x') ){
+                achou = 1;
+                userLido->status = 'x';
+                fseek(fUser, -1*sizeof(Usuario), SEEK_CUR);
+                fwrite(userLido,sizeof(Usuario),1,fUser);
+                break;
+            } free(userLido);
+        } if(achou == 0){
+            printf("\n\nUsuario nao foi encontrado");
+            fclose(fUser);
+            }
+        fclose(fUser); 
+    }
+}
+
+void atualizaEmail(Usuario* userLido, char*cpf){
+    FILE *fUser;
+    char emailN[61];
+    int achou = 0;
+
+    if(userLido == NULL){
+        printf("\n\nO USUARIO NAO EXISTE\n");
+    } else {
+        fUser = fopen("Usuarios.dat", "r+b");
+
+        if(fUser == NULL){
+            printf("Não foi possível abrir o arquivo.\n\n");
+            printf("Fechando o programa...");
+            exit(1);
+        }
+        while(!feof(fUser)){
+            if(strcmp(userLido->cpf,cpf) == 0 && (userLido->status != 'x') ){
+                achou = 1;
+                printf("DIGITE O NOVO EMAIL: ");
+                scanf("%[^\n]",emailN);
+                getchar();
+                strcpy(userLido->email, emailN);
+                fseek(fUser, -1*sizeof(Usuario), SEEK_CUR);
+                fwrite(userLido,sizeof(Usuario),1,fUser);
+                break;
+            } free(userLido);
+        } if(achou == 0){
+            printf("\n\nUsuario nao foi encontrado");
+            fclose(fUser);
+            }
+        fclose(fUser); 
+    }
+}
+
+void atualizaLogin(Usuario* userLido, char*cpf){
+    FILE *fUser;
+    char loginN[16];
+    int achou = 0;
+
+    if(userLido == NULL){
+        printf("\n\nO USUARIO NAO EXISTE\n");
+    } else {
+        fUser = fopen("Usuarios.dat", "r+b");
+
+        if(fUser == NULL){
+            printf("Não foi possível abrir o arquivo.\n\n");
+            printf("Fechando o programa...");
+            exit(1);
+        }
+        while(!feof(fUser)){
+            if(strcmp(userLido->cpf,cpf) == 0 && (userLido->status != 'x') ){
+                achou = 1;
+                printf("DIGITE O NOVO LOGIN: ");
+                scanf("%[^\n]",loginN);
+                getchar();
+                strcpy(userLido->usuario, loginN);
+                fseek(fUser, -1*sizeof(Usuario), SEEK_CUR);
+                fwrite(userLido,sizeof(Usuario),1,fUser);
+                break;
+            } free(userLido);
+        } if(achou == 0){
+            printf("\n\nUsuario nao foi encontrado");
+            fclose(fUser);
+            }
+        fclose(fUser); 
+    }
+}
+
+void atualizaSenha(Usuario* userLido, char*cpf){
+    FILE *fUser;
+    char senhaN[16];
+    int achou = 0;
+
+    if(userLido == NULL){
+        printf("\n\nO USUARIO NAO EXISTE\n");
+    } else {
+        fUser = fopen("Usuarios.dat", "r+b");
+
+        if(fUser == NULL){
+            printf("Não foi possível abrir o arquivo.\n\n");
+            printf("Fechando o programa...");
+            exit(1);
+        }
+        while(!feof(fUser)){
+            if(strcmp(userLido->cpf,cpf) == 0 && (userLido->status != 'x') ){
+                achou = 1;
+                printf("DIGITE A NOVA SENHA: ");
+                scanf("%[^\n]",senhaN);
+                getchar();
+                strcpy(userLido->senha, senhaN);
+                fseek(fUser, -1*sizeof(Usuario), SEEK_CUR);
+                fwrite(userLido,sizeof(Usuario),1,fUser);
+                break;
+            } free(userLido);
+        } if(achou == 0){
+            printf("\n\nUsuario nao foi encontrado");
+            fclose(fUser);
+            }
+        fclose(fUser); 
     }
 }
