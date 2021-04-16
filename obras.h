@@ -1,7 +1,7 @@
 struct obras
 {
     char titulo[51];
-    char autor[51];
+    char autor[61];
     char datap[11];
     char edicao[4];
     char isbn[14];
@@ -39,8 +39,16 @@ void excluirObra(void);
 
 void salvarObra(Obras*);
 
-Obras* buscarObra(char*);
-
 void exibirObra(Obras*);
 
 void delObra(Obras*,char*);
+
+void atualizaAutor(Obras*, char*);
+
+void atualizaDatap(Obras*, char*);
+
+void atualizaEdicao(Obras*, char*);
+
+Obras* buscarObra(char*);
+
+void atualizaTitulo(Obras*, char*);

@@ -130,8 +130,9 @@ char atualizarObra(void) {
 
 void atualizarTitulo(void){
     char isbn[14];
-    char obraA[51];
-    char obraN[51];
+    Obras *busca;
+
+    busca = (Obras*)malloc(sizeof(Obras));
     system("cls");
     printf("//===============================================================================//\n");
     printf("//&&&&&&&&&&&&&&&&&&&&&&|     ATUALIZACAO DE TITULO      |&&&&&&&&&&&&&&&&&&&&&&&//\n");
@@ -142,12 +143,9 @@ void atualizarTitulo(void){
     printf("//.   DIGITE O ISBN DA OBRA: ");
     scanf("%[0-9]",isbn);
     getchar();
-    printf("//.   DIGITE O NOME ATUAL DA OBRA: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ0-9]",obraA);
-    getchar();
-    printf("//.   DIGITE O NOVO NOME DA OBRA: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÃÕ a-záéíóúâêôãõ0-9]",obraN);
-    getchar();
+    busca = buscarObra(isbn);
+    atualizaTitulo(busca,isbn);
+    free(busca);
     printf("//.                                                                             .//\n");
     printf("//###############################################################################//\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
@@ -336,7 +334,7 @@ void exibirObra(Obras* obra){
     if(obra == NULL){
         printf("\n\nA OBRA NAO EXISTE.\n");
     } else{
-        printf("\n\n-------------------USUARIO CADASTRADO---------------------\n\n");
+        printf("\n\n-------------------OBRA CADASTRADA---------------------\n\n");
         printf("|  TITULO: %s                                                   \n", obra->titulo);
         printf("|  AUTOR: %s                                                    \n", obra->autor);
         printf("|  DATA DE PUBLICACAO: %s                                                  \n", obra->datap);
@@ -373,6 +371,40 @@ void delObra(Obras* obraLida, char*isbn){
                 break;
             } free(obraLida);
         }
+        fclose(fObra); 
+    }
+}
+
+void atualizaTitulo(Obras* obraLida, char*isbn){
+    FILE *fObra;
+    char tituloN[51];
+    int achou = 0;
+
+    if(obraLida == NULL){
+        printf("\n\nA Obra NAO EXISTE\n");
+    } else {
+        fObra = fopen("Obras.dat", "r+b");
+
+        if(fObra == NULL){
+            printf("Não foi possível abrir o arquivo.\n\n");
+            printf("Fechando o programa...");
+            exit(1);
+        }
+        while(!feof(fObra)){
+            if(strcmp(obraLida->isbn,isbn) == 0 && (obraLida ->status != 'x') ){
+                achou = 1;
+                printf("DIGITE O NOVO TITULO: ");
+                scanf("%[^\n]",tituloN);
+                getchar();
+                strcpy(obraLida->titulo, tituloN);
+                fseek(fObra, -1*sizeof(Obras), SEEK_CUR);
+                fwrite(obraLida,sizeof(Obras),1,fObra);
+                break;
+            } free(obraLida);
+        } if(achou == 0){
+            printf("\n\nObra nao foi encontrado");
+            fclose(fObra);
+            }
         fclose(fObra); 
     }
 }
