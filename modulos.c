@@ -1,5 +1,6 @@
 #include "relatorios.h"
 #include "usuario.h"
+#include "obras.h"
 
 void moduloUsuario(void) {
     char resposta;
@@ -169,6 +170,10 @@ void moduloRelatorioC(void){
             case 'N':
             telaRelcli();
             break;
+            
+            case 'E':
+            telaRelcliE();
+            break;
         }
     } while(resposta != '0');
 }
@@ -179,7 +184,7 @@ void moduloRelatorioO(void){
         resposta = menuReObra();
         switch(resposta){
             case 'N':
-            relatorioObra();
+            telaRelcliO();
             break;
         }
     } while(resposta != '0');

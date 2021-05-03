@@ -13,6 +13,8 @@ void cadastrarEmp(void) {
     int dataValida;
     Emp *emp;
     emp = (Emp*)malloc(sizeof(Emp));
+    Obras *busca;
+    busca = (Obras*)malloc(sizeof(Obras)); 
 
     system("cls");
     printf("\n");
@@ -25,12 +27,15 @@ void cadastrarEmp(void) {
     printf("//.   ISBN DA OBRA: ");
     scanf("%[^\n]",emp->isbn);
     getchar();
-    while(validaIsbn(emp->isbn) == 0 || buscarObra(emp->isbn) == NULL){
+    while(validaIsbn(emp->isbn) == 0 || buscarObraEmp(emp->isbn) == NULL){
         printf("//.   ISBN INVALIDO, POR FAVOR DIGITE NOVAMENTE.\n\n");
         printf("//.   ISBN: ");
         scanf("%[^\n]",emp->isbn);
         getchar();
     }
+    busca = buscarObra(emp->isbn);
+    attStatus(busca,emp->isbn);
+    free(busca);
     printf("//.   DATA DO EMPRESTIMO: ");
     scanf("%[^\n]", emp->dataEmp);
     getchar();
@@ -89,7 +94,7 @@ void cadastrarEmp(void) {
 }
 
 void consultarEmp(void) {
-    char cpf[12];
+    char isbn[14];
     Emp *busca;
 
     busca = (Emp*)malloc(sizeof(Emp));
@@ -102,16 +107,16 @@ void consultarEmp(void) {
     printf("//.                                                                             .//\n");
     printf("//.   PESQUISA                                                                  .//\n");
     printf("//.                                                                             .//\n");
-    printf("//.   CPF - apenas numeros - : ");
-    scanf("%[^\n]",cpf);
+    printf("//.   ISBN - apenas numeros - : ");
+    scanf("%[^\n]",isbn);
     getchar();
-    while (validaCPF(cpf) == 0){
+    while (validaIsbn(isbn) == 0){
         printf("//.   CPF INVALIDO\n\n");
         printf("//.   CPF - apenas numeros - : ");
-        scanf("%[^\n]", cpf);
+        scanf("%[^\n]", isbn);
         getchar();
     }
-    busca = buscaEmp(cpf);
+    busca = buscaEmp(isbn);
     exibirEmp(busca);
     free(busca);
     printf("//.                                                                             .//\n");
@@ -175,8 +180,10 @@ void devolverEmp(void) {
     char multa;
     int diasAlugado;
     Emp *busca;
+    Obras*busca2;
 
     busca = (Emp*)malloc(sizeof(Emp));
+    busca2 = (Obras*)malloc(sizeof(Obras));
 
     getchar();
     system("cls");
@@ -199,15 +206,18 @@ void devolverEmp(void) {
     printf("//.   ISBN: ");
     scanf("%[0-9]",isbn);
     getchar();
-    while(validaIsbn(isbn) == 0){
+    while(validaIsbn(isbn) == 0 || buscarObraD(isbn) == NULL){
         printf("//.   ISBN INVALIDO, POR FAVOR DIGITE NOVAMENTE.\n\n");
         printf("//.   ISBN: ");
         scanf("%[^\n]",isbn);
         getchar();
     }
-    busca = buscaEmp(cpf);
+    busca = buscaEmp(isbn);
     devEmp(busca,isbn);
+    busca2 = buscarObraD(isbn);
+    attStatusD(busca2,isbn);
     free(busca);
+    free(busca2);
     printf("//.                                                                             .//\n");
     printf("//.                                                                             .//\n");
     printf("//-------------------------------------------------------------------------------//\n");
@@ -249,7 +259,7 @@ void exibirEmp(Emp* emprestimo){
     free(emprestimo);
 }
 
-Emp* buscaEmp(char* cpf){
+Emp* buscaEmp(char* isbn){
     
     FILE *fEmp;
     Emp *emprestimo;
@@ -265,7 +275,7 @@ Emp* buscaEmp(char* cpf){
     }
     while (!feof(fEmp)){
         fread(emprestimo,sizeof(Emp),1,fEmp);
-        if(strcmp(emprestimo->cpf,cpf) == 0 && (emprestimo->status != 'x')){
+        if(strcmp(emprestimo->isbn,isbn) == 0 && (emprestimo->status != 'x')){
             fclose(fEmp);
             return emprestimo;   
         }

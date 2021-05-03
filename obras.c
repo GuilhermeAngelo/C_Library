@@ -376,6 +376,60 @@ Obras* buscarObra(char *isbn){
     return NULL;
 
 }
+
+Obras* buscarObraEmp(char *isbn){
+    
+    FILE *fObra;
+    Obras* obra;
+
+    obra = (Obras*)malloc(sizeof(Obras));
+
+    fObra = fopen("Obras.dat","rb");
+    if(fObra == NULL){
+        printf("Nao foi possivel ler o aquivo\n\n");
+        printf("Fechando o programa...");
+        exit(1);
+    }
+    while(!feof(fObra)){
+        fread(obra,sizeof(Obras),1,fObra);
+        if(strcmp(obra->isbn,isbn) == 0 && (obra->status == '0')){
+            printf("\n//.   A OBRA JA FOI EMPRESTADA.\n");
+            return NULL;    
+        }
+        if(strcmp(obra->isbn, isbn) == 0 && (obra->status != 'x') && (obra->status != '0')){
+            fclose(fObra);
+            return obra;
+        }
+    }
+    fclose(fObra);
+    return NULL;
+
+}
+
+Obras* buscarObraD(char *isbn){
+    
+    FILE *fObra;
+    Obras* obra;
+
+    obra = (Obras*)malloc(sizeof(Obras));
+
+    fObra = fopen("Obras.dat","rb");
+    if(fObra == NULL){
+        printf("Nao foi possivel ler o aquivo\n\n");
+        printf("Fechando o programa...");
+        exit(1);
+    }
+    while(!feof(fObra)){
+        fread(obra,sizeof(Obras),1,fObra);
+        if(strcmp(obra->isbn, isbn) == 0 && (obra->status != 'x') && (obra->status == '0')){
+            fclose(fObra);
+            return obra;
+        }
+    }
+    fclose(fObra);
+    return NULL;
+
+}
 //Adaptada de @flaviusgoronio//
 void exibirObra(Obras* obra){
     if(obra == NULL){
@@ -582,4 +636,78 @@ void atualizaEdicao(Obras* obraLida, char*isbn){
             }
         fclose(fObra); 
     }
+}
+
+void attStatusD(Obras* obraLida, char*isbn){
+    FILE *fObra;
+    int achou = 0;
+
+    if(obraLida == NULL){
+        printf("\n\nA OBRA NAO EXISTE\n");
+    } else {
+        fObra = fopen("Obras.dat", "r+b");
+
+        if(fObra == NULL){
+            printf("Não foi possível abrir o arquivo.\n\n");
+            printf("Fechando o programa...");
+            exit(1);
+        }
+        while(!feof(fObra)){
+            if(strcmp(obraLida->isbn,isbn) == 0 && (obraLida->status != 'x') && (obraLida->status == '0') ){
+                obraLida->status = '1';
+                fseek(fObra, -1*sizeof(Obras), SEEK_CUR);
+                fwrite(obraLida,sizeof(Obras),1,fObra);
+                break;
+            } free(obraLida);
+        }
+        fclose(fObra); 
+    }
+}
+
+void attStatus(Obras*obraLida, char*isbn){
+    FILE *fObra;
+    int achou = 0;
+
+    if(obraLida == NULL){
+        printf("\n\nA OBRA NAO EXISTE\n");
+    } else {
+        fObra = fopen("Obras.dat", "r+b");
+
+        if(fObra == NULL){
+            printf("Não foi possível abrir o arquivo.\n\n");
+            printf("Fechando o programa...");
+            exit(1);
+        }
+        while(!feof(fObra)){
+            if(strcmp(obraLida->isbn,isbn) == 0 && (obraLida->status != 'x')){
+                achou = 1;
+                obraLida->status = '0';
+                fseek(fObra, -1*sizeof(Obras), SEEK_CUR);
+                fwrite(obraLida,sizeof(Obras),1,fObra);
+                break;
+            } free(obraLida);
+        }
+        fclose(fObra); 
+    }
+}
+
+void relObras(void){
+    FILE *fObra;
+    Obras *obra;
+    int count = 0;
+
+    obra = (Obras*)malloc(sizeof(Obras));
+    fObra = fopen("Obras.dat", "rb");
+    
+    if(fObra == NULL){
+        printf("Não foi possivel Abrir o arquivo...\n\n Fechando...");
+        exit(1);
+    } while (fread(obra,sizeof(Obras), 1, fObra)){
+            if(obra->status != 'x'){
+                count = count + 1;
+                printf("//.   %d - %s     ISBN: %s\n", count,obra->titulo,obra->isbn);
+            }
+        }
+        fclose(fObra);
+        free(obra);
 }

@@ -53,3 +53,13 @@ void atualizaEdicao(Obras*, char*);
 Obras* buscarObra(char*);
 
 void atualizaTitulo(Obras*, char*);
+
+void relObras(void);
+
+void attStatus(Obras*obraLida, char*isbn);
+
+void attStatusD(Obras*obraLida, char*isbn);
+
+Obras* buscarObraEmp(char*isbn);
+
+Obras* buscarObraD(char*isbn);

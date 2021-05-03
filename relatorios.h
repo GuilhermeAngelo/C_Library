@@ -5,3 +5,5 @@ char menuReUser(void);
 char menuReObra(void);
 char menuReEmp(void);
 void telaRelcli(void);
+void telaRelcliE(void);
+void telaRelcliO(void);

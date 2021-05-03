@@ -598,6 +598,7 @@ void atualizaSenha(Usuario* userLido, char*cpf){
 void relClientes(void){
     FILE *fCli;
     Usuario *cliente;
+    int count = 0;
 
     cliente = (Usuario*)malloc(sizeof(Usuario));
     fCli = fopen("Usuarios.dat", "rb");
@@ -607,9 +608,31 @@ void relClientes(void){
         exit(1);
     } while (fread(cliente,sizeof(Usuario), 1, fCli)){
             if(cliente->status != 'x'){
-                printf("//.   %s\n", cliente->nome);
+                count = count + 1;
+                printf("//.   %d - %s\n", count,cliente->nome);
             }
         }
         fclose(fCli);
         free(cliente);
-    }
+}
+
+void relClientesE(void){
+    FILE *fCli;
+    Usuario *cliente;
+    int count = 0;
+
+    cliente = (Usuario*)malloc(sizeof(Usuario));
+    fCli = fopen("Usuarios.dat", "rb");
+    
+    if(fCli == NULL){
+        printf("Não foi possivel Abrir o arquivo...\n\n Fechando...");
+        exit(1);
+    } while (fread(cliente,sizeof(Usuario), 1, fCli)){
+            if(cliente->status != 'x'){
+                count = count + 1;
+                printf("//.   %d - %s          %s\n", count,cliente->nome,cliente->email);
+            }
+        }
+        fclose(fCli);
+        free(cliente);
+}
