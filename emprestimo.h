@@ -1,3 +1,5 @@
+typedef struct emprestimo Emp;
+
 struct emprestimo{ 
     
         char isbn[14];
@@ -5,8 +7,8 @@ struct emprestimo{
         char dataDevolve[11];
         char cpf[12];
         char status;
+        Emp *proxi;
     };
-    typedef struct emprestimo Emp;
 
 //Cadastra um emprestimo
 void cadastrarEmp(void);
@@ -23,3 +25,5 @@ void devolverEmp(void);
 void salvarEmp(Emp*);
 Emp* buscaEmp(char*);
 void exibirEmp(Emp*);
+Emp* buscaEmpDev(char*,char*);
+void devEmp(Emp*,char*);

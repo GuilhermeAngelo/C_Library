@@ -14,3 +14,5 @@ void moduloAtualizarO(void);
 void moduloEmprestimo(void);
 
 void moduloRelatorio(void);
+
+void moduloRelatorioC(void);

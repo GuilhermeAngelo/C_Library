@@ -20,3 +20,9 @@ int converteAno(char[]);
 int bissexto(int);
 
 int testaData(int, int, int);
+
+int validaEdicao(char[]);
+
+int validaIsbn(char[]);
+
+int validaTitulo(char[]);

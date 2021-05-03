@@ -1,3 +1,5 @@
+typedef struct obras Obras;
+
 struct obras
 {
     char titulo[51];
@@ -6,9 +8,8 @@ struct obras
     char edicao[4];
     char isbn[14];
     char status;
+    Obras* prox;
 };
-
-typedef struct obras Obras;
 
 // Cadastra uma determinada obra
 void cadastrarObra(void);

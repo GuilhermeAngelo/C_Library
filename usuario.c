@@ -124,7 +124,6 @@ char menuAtuUser(void) {
     printf("//.   O QUE DESEJA ATUALIZAR?                                                   .//\n");
     printf("//.                                                                             .//\n");
     printf("//.   N - NOME                                                                  .//\n");
-    printf("//.   C - CPF                                                                   .//\n");
     printf("//.   E - EMAIL                                                                 .//\n");
     printf("//.   U - LOGIN                                                                 .//\n");
     printf("//.   S - SENHA                                                                 .//\n");
@@ -399,7 +398,7 @@ void exibirUser(Usuario* user){
         printf("|  LOGIN: %s                                                  \n", user->usuario);
         if(user->status == '1'){
         printf("|  STATUS: %c                                                 \n", user->status);
-        printf("\n----------------------------------------------------------\n\n");
+        printf("\n------------------------------------------------------------\n");
         
         }
     }
@@ -427,6 +426,12 @@ void atualiza(Usuario* userLido, char*cpf){
                 printf("DIGITE O NOVO NOME: ");
                 scanf("%[^\n]",nomeN);
                 getchar();
+                while(validaNome(nomeN) == 0){
+                    printf("//.   NOME INVALIDO.\n\n");
+                    printf("//.   NOME COMPLETO: ");
+                    scanf("%[^\n]",nomeN);
+                    getchar();
+                }
                 strcpy(userLido->nome, nomeN);
                 fseek(fUser, -1*sizeof(Usuario), SEEK_CUR);
                 fwrite(userLido,sizeof(Usuario),1,fUser);
@@ -491,6 +496,12 @@ void atualizaEmail(Usuario* userLido, char*cpf){
                 printf("DIGITE O NOVO EMAIL: ");
                 scanf("%[^\n]",emailN);
                 getchar();
+                while(validaEmail(emailN) == 0) {
+                    printf("//.   EMAIL INVALIDO.\n\n");
+                    printf("//.   EMAIL: ");
+                    scanf("%[^\n]",emailN);
+                    getchar();
+                }
                 strcpy(userLido->email, emailN);
                 fseek(fUser, -1*sizeof(Usuario), SEEK_CUR);
                 fwrite(userLido,sizeof(Usuario),1,fUser);
@@ -525,6 +536,12 @@ void atualizaLogin(Usuario* userLido, char*cpf){
                 printf("DIGITE O NOVO LOGIN: ");
                 scanf("%[^\n]",loginN);
                 getchar();
+                while (validaUsuario(loginN) == 0) {
+                    printf(".//   LOGIN INVALIDO.\n\n");
+                    printf(".//   LOGIN - MINIMO 4 CARACTERES -: ");
+                    scanf("%[^\n]",loginN);
+                    getchar();
+                }
                 strcpy(userLido->usuario, loginN);
                 fseek(fUser, -1*sizeof(Usuario), SEEK_CUR);
                 fwrite(userLido,sizeof(Usuario),1,fUser);
@@ -559,6 +576,12 @@ void atualizaSenha(Usuario* userLido, char*cpf){
                 printf("DIGITE A NOVA SENHA: ");
                 scanf("%[^\n]",senhaN);
                 getchar();
+                while(validaSenha(senhaN) == 0){
+                    printf(".//   SENHA INVALIDA.\n\n");
+                    printf("//.   SENHA - MINIMO 4 CARACTERES - : ");
+                    scanf("%[^\n]",senhaN);
+                    getchar();
+                }
                 strcpy(userLido->senha, senhaN);
                 fseek(fUser, -1*sizeof(Usuario), SEEK_CUR);
                 fwrite(userLido,sizeof(Usuario),1,fUser);
@@ -571,3 +594,22 @@ void atualizaSenha(Usuario* userLido, char*cpf){
         fclose(fUser); 
     }
 }
+
+void relClientes(void){
+    FILE *fCli;
+    Usuario *cliente;
+
+    cliente = (Usuario*)malloc(sizeof(Usuario));
+    fCli = fopen("Usuarios.dat", "rb");
+    
+    if(fCli == NULL){
+        printf("Não foi possivel Abrir o arquivo...\n\n Fechando...");
+        exit(1);
+    } while (fread(cliente,sizeof(Usuario), 1, fCli)){
+            if(cliente->status != 'x'){
+                printf("//.   %s\n", cliente->nome);
+            }
+        }
+        fclose(fCli);
+        free(cliente);
+    }

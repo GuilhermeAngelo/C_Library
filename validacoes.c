@@ -1,5 +1,6 @@
 #include <string.h>
 #include <math.h>
+#include "validacoes.h"
 
 //função retirada de https://repl.it/@flaviusgorgonio/validacaoCPFc#main.c e feita por @flaviusgorgonio,2021.
 
@@ -326,4 +327,24 @@ int bissexto(int aa) {
   } else {
     return 0;
   }
+}
+
+int validaTitulo(char titulo[]){
+    if(strlen(titulo) < 1 || strlen(titulo) > 51){
+    return 0;
+  }
+  for(int i = 0; titulo[i] != '\0'; i++){
+    if(titulo[i] >= 'A' && titulo[i] <= 'Z'){
+        continue;
+    } else if(titulo[i] >= 'a' && titulo[i] <= 'z'){
+
+    } else if(titulo[i] <= '9' && titulo[i] >= '0'){
+        continue;
+    } else if(titulo[i] == ' '){
+        continue;
+    }else {
+        return 0;
+    }
+  }
+  return 1;
 }

@@ -22,11 +22,17 @@ void cadastrarObra(void) {
     printf("//.   TITULO DA OBRA: ");
     scanf("%[^\n]",obra->titulo);
     getchar();
+    while(validaTitulo(obra->titulo) == 0){
+        printf("//.   TITULO DIGITADO INVALIDO. POR FAVOR, DIGITE NOVAMENTE.\n\n");
+        printf("//.   TITULO: ");
+        scanf("%[^\n]",obra->titulo);
+        getchar();
+    }
     printf("//.   AUTOR: ");
     scanf("%[^\n]",obra->autor);
     getchar();
     while(validaAutor(obra->autor) == 0){
-        printf("//.   O NOME DIGITADO INVALIDO. POR FAVOR, DIGITAR NOVAMENTE.\n\n");
+        printf("//.   NOME DIGITADO INVALIDO. POR FAVOR, DIGITAR NOVAMENTE.\n\n");
         printf("//.   AUTOR: ");
         scanf("%[^\n]",obra->autor);
         getchar();
@@ -34,7 +40,6 @@ void cadastrarObra(void) {
     printf("//.   DATA DE PUBLICACAO: ");
     scanf("%[^\n]",obra->datap);
     getchar();
-
     dia = converteDia(obra->datap);
     mes = converteMes(obra->datap);
     ano = converteAno(obra->datap);
@@ -50,11 +55,23 @@ void cadastrarObra(void) {
         dataValida = testaData(dia,mes,ano);
     }
     printf("//.   EDICAO: ");
-    scanf("%[0-9]",obra->edicao);
+    scanf("%[^\n]",obra->edicao);
     getchar();
+    while(validaEdicao(obra->edicao) == 0){
+        printf("//.   EDICAO INVALIDA, POR FAVOR DIGITE NOVAMENTE.\n\n");
+        printf("//.   EDICAO: ");
+        scanf("%[^\n]", obra->edicao);
+        getchar();
+    }
     printf("//.   ISBN: ");
     scanf("%[0-9]",obra->isbn);
     getchar();
+    while(validaIsbn(obra->isbn) == 0){
+        printf("//.   ISBN INVALIDO, POR FAVOR DIGITE NOVAMENTE.\n\n");
+        printf("//.   ISBN: ");
+        scanf("%[^\n]", obra->isbn);
+        getchar();
+    }
     obra->status = '1';
     salvarObra(obra);
     free(obra);
@@ -84,6 +101,12 @@ void consultarObra(void) {
     printf("//.   ISBN DA OBRA : ");
     scanf("%[0-9]",pesquisa);
     getchar();
+    while(validaIsbn(pesquisa) == 0){
+        printf("//.   ISBN INVALIDO, POR FAVOR DIGITE NOVAMENTE.\n\n");
+        printf("//.   ISBN: ");
+        scanf("%[^\n]", pesquisa);
+        getchar();
+    }
     busca = buscarObra(pesquisa);
     exibirObra(busca);
     free(busca);
@@ -113,7 +136,6 @@ char atualizarObra(void) {
     printf("//.   A - AUTOR                                                                 .//\n");
     printf("//.   D - DATA DE PUBLICACAO                                                    .//\n");
     printf("//.   E - EDICAO                                                                .//\n");
-    printf("//.   I - ISBN                                                                  .//\n");
     printf("//.   0 - SAIR                                                                  .//\n");
     printf("//.                                                                             .//\n");
     printf("//.-----------------------------------------------------------------------------.//\n");
@@ -143,6 +165,12 @@ void atualizarTitulo(void){
     printf("//.   DIGITE O ISBN DA OBRA: ");
     scanf("%[0-9]",isbn);
     getchar();
+    while(validaIsbn(isbn) == 0){
+        printf("//.   ISBN INVALIDO, POR FAVOR DIGITE NOVAMENTE.\n\n");
+        printf("//.   ISBN: ");
+        scanf("%[^\n]",isbn);
+        getchar();
+    }
     busca = buscarObra(isbn);
     atualizaTitulo(busca,isbn);
     free(busca);
@@ -168,6 +196,12 @@ void atualizarAutor(void){
     printf("//.   DIGITE O ISBN DA OBRA: ");
     scanf("%[0-9]",isbn);
     getchar();
+    while(validaIsbn(isbn) == 0){
+        printf("//.   ISBN INVALIDO, POR FAVOR DIGITE NOVAMENTE.\n\n");
+        printf("//.   ISBN: ");
+        scanf("%[^\n]",isbn);
+        getchar();
+    }
     busca = buscarObra(isbn);
     atualizaAutor(busca,isbn);
     free(busca);
@@ -194,6 +228,12 @@ void atualizardatap(void){
     printf("//.   DIGITE O ISBN DA OBRA: ");
     scanf("%[0-9]",isbn);
     getchar();
+    while(validaIsbn(isbn) == 0){
+        printf("//.   ISBN INVALIDO, POR FAVOR DIGITE NOVAMENTE.\n\n");
+        printf("//.   ISBN: ");
+        scanf("%[^\n]",isbn);
+        getchar();
+    }
     busca = buscarObra(isbn);
     atualizaDatap(busca,isbn);
     free(busca);
@@ -218,6 +258,12 @@ void atualizarEdicao(void){
     printf("//.   DIGITE O ISBN DA OBRA: ");
     scanf("%[0-9]",isbn);
     getchar();
+    while(validaIsbn(isbn) == 0){
+        printf("//.   ISBN INVALIDO, POR FAVOR DIGITE NOVAMENTE.\n\n");
+        printf("//.   ISBN: ");
+        scanf("%[^\n]",isbn);
+        getchar();
+    }
     busca = buscarObra(isbn);
     atualizaEdicao(busca,isbn);
     free(busca);
@@ -232,6 +278,7 @@ void atualizarIsbn(void){
     char isbnA[14];
     char autor[51];
     char isbnN[14];
+    
     system("cls");
     printf("//===============================================================================//\n");
     printf("//&&&&&&&&&&&&&&&&&&&&&&|      ATUALIZACAO DE ISBN       |&&&&&&&&&&&&&&&&&&&&&&&//\n");
@@ -272,6 +319,12 @@ void excluirObra(void) {
     printf("//.   ISBN DA OBRA : ");
     scanf("%[0-9]",isbn);
     getchar();
+    while(validaIsbn(isbn) == 0){
+        printf("//.   ISBN INVALIDO, POR FAVOR DIGITE NOVAMENTE.\n\n");
+        printf("//.   ISBN: ");
+        scanf("%[^\n]",isbn);
+        getchar();
+    }
     busca = buscarObra(isbn);
     delObra(busca,isbn);
     free(busca);
@@ -390,6 +443,12 @@ void atualizaTitulo(Obras* obraLida, char*isbn){
                 printf("DIGITE O NOVO TITULO: ");
                 scanf("%[^\n]",tituloN);
                 getchar();
+                while(validaTitulo(tituloN) == 0){
+                    printf("//.   TITULO DIGITADO INVALIDO. POR FAVOR, DIGITE NOVAMENTE.\n\n");
+                    printf("//.   TITULO: ");
+                    scanf("%[^\n]",tituloN);
+                    getchar();
+                }
                 strcpy(obraLida->titulo, tituloN);
                 fseek(fObra, -1*sizeof(Obras), SEEK_CUR);
                 fwrite(obraLida,sizeof(Obras),1,fObra);
@@ -424,6 +483,12 @@ void atualizaAutor(Obras* obraLida, char*isbn){
                 printf("DIGITE O NOVO AUTOR: ");
                 scanf("%[^\n]",autorN);
                 getchar();
+                while(validaAutor(autorN) == 0){
+                    printf("//.   NOME DIGITADO INVALIDO. POR FAVOR, DIGITAR NOVAMENTE.\n\n");
+                    printf("//.   AUTOR: ");
+                    scanf("%[^\n]",autorN);
+                    getchar();
+                }
                 strcpy(obraLida->autor,autorN);
                 fseek(fObra, -1*sizeof(Obras), SEEK_CUR);
                 fwrite(obraLida,sizeof(Obras),1,fObra);
@@ -440,7 +505,7 @@ void atualizaAutor(Obras* obraLida, char*isbn){
 void atualizaDatap(Obras* obraLida, char*isbn){
     FILE *fObra;
     char datapN[11];
-    int achou = 0;
+    int achou = 0,dia,mes,ano,dataValida;
 
     if(obraLida == NULL){
         printf("\n\nA OBRA NAO EXISTE\n");
@@ -458,6 +523,20 @@ void atualizaDatap(Obras* obraLida, char*isbn){
                 printf("DIGITE A NOVA DATA DE PUBLICACAO: ");
                 scanf("%[^\n]",datapN);
                 getchar();
+                dia = converteDia(datapN);
+                mes = converteMes(datapN);
+                ano = converteAno(datapN);
+                dataValida = testaData(dia,mes,ano);
+                while(dataValida == 0){
+                    printf("//.   DATA INVALIDA, POR FAVOR DIGITE NOVAMENTE.\n\n");
+                    printf("//.   DATA DE PUBLICACAO: ");
+                    scanf("%[^\n]", datapN);
+                    getchar();
+                    dia = converteDia(datapN);
+                    mes = converteMes(datapN);
+                    ano = converteAno(datapN);
+                    dataValida = testaData(dia,mes,ano);
+                }
                 strcpy(obraLida->datap,datapN);
                 fseek(fObra, -1*sizeof(Obras), SEEK_CUR);
                 fwrite(obraLida,sizeof(Obras),1,fObra);

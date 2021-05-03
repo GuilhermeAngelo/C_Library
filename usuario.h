@@ -1,3 +1,5 @@
+typedef struct usuario Usuario;
+
 struct usuario
 {
     char nome[61];
@@ -6,9 +8,9 @@ struct usuario
     char usuario[16];
     char senha[16];
     char status;
-    
+    Usuario *prox;
 };
-typedef struct usuario Usuario;
+
 
 //cadastra um usuário
 void cadastrarUser(void);
@@ -52,3 +54,5 @@ void atualizaEmail(Usuario*, char*);
 void atualizaLogin(Usuario*, char*);
 
 void atualizaSenha(Usuario*, char*);
+
+void relClientes(void);

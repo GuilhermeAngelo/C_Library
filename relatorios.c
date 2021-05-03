@@ -1,9 +1,106 @@
-void relatorioCli(void){
-    for(int i = 0; i < 10; i++){
-        printf("\n\nNOME:        |    ATIVO:   |   FREQUENCIA P/mes:   |   MULTA:   |    Atrasos:\n\n");
-        printf("Guilherme Angelo |    SIM      |       3 DIAS         |  0 REAIS    |      0     \n");
-    }
+#include "usuario.h"
+#include "obras.h"
+#include "emprestimo.h"
+
+char menuReUser(void) {
+    char opcao;
+
+    system("cls");
+    printf("\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    printf("/!!!!!!!!!!!!!!!!!!!!!!!      RELATORIO DE CLIENTES       !!!!!!!!!!!!!!!!!!!!!!!!//\n");
+    printf("//.-----------------------------------------------------------------------------.//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   QUAL RELATORIO DESEJA?                                                    .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   0 - SAIR                                                                  .//\n");
+    printf("//.   N - LISTA DE NNOMES DE CLIENTES - ORDEM DE CADASTRO                       .//\n");
+    printf("//.-----------------------------------------------------------------------------.//\n");
+    printf("//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    printf("\nSelecione: ");
+    scanf("%c",&opcao);
     getchar();
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+    return opcao;
+}
+
+char menuReObra(void) {
+    char opcao;
+
+    system("cls");
+    printf("\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    printf("/!!!!!!!!!!!!!!!!!!!!!!!      RELATORIO DE OBRAS         !!!!!!!!!!!!!!!!!!!!!!!!//\n");
+    printf("//.-----------------------------------------------------------------------------.//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   QUAL RELATORIO DESEJA?                                                    .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   0 - SAIR                                                                  .//\n");
+    printf("//.   N - EXIBIR LISTA DE OBRAS                                                 .//\n");
+    printf("//.-----------------------------------------------------------------------------.//\n");
+    printf("//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    printf("\nSelecione: ");
+    scanf("%c",&opcao);
+    getchar();
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+    return opcao;
+}
+
+char menuReEmp(void) {
+    char opcao;
+    
+    system("cls");
+    printf("\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    printf("/!!!!!!!!!!!!!!!!!!!!!!!    RELATORIO DE EMPRESTIMOS     !!!!!!!!!!!!!!!!!!!!!!!!//\n");
+    printf("//.-----------------------------------------------------------------------------.//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   QUAL RELATORIO DESEJA?                                                    .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   0 - SAIR                                                                  .//\n");
+    printf("//.   N - EXIBIR LISTA DE EMPRESTIMOS                                           .//\n");
+    printf("//.   I - EXIBIR LISTA DE ISBNS ALUGADOS                                        .//\n");
+    printf("//.   C - EXIBIR LISTA DE CPF                                                   .//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.-----------------------------------------------------------------------------.//\n");
+    printf("//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    printf("\nSelecione: ");
+    scanf("%c",&opcao);
+    getchar();
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+    return opcao;
+}
+
+void telaRelcli(void){
+
+    system("cls");
+    printf("\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    printf("/!!!!!!!!!!!!!!!!!!!!!!!         LISTA DE CLIENTES       !!!!!!!!!!!!!!!!!!!!!!!!//\n");
+    printf("//.-----------------------------------------------------------------------------.//\n");
+    printf("//.                                                                             .//\n");
+    printf("//. NOME:                                                                       .//\n\n");
+    relClientes();
+    printf("//.-----------------------------------------------------------------------------.//\n");
+    printf("//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    getchar();
+
 }
 
 void relatorioObra(void){

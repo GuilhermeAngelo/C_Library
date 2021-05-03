@@ -1,3 +1,6 @@
+#include "relatorios.h"
+#include "usuario.h"
+
 void moduloUsuario(void) {
     char resposta;
         
@@ -144,14 +147,50 @@ void moduloRelatorio(void){
         resposta = menuRelatorio();
         switch(resposta){
             case '1':
-            relatorioCli();
+            moduloRelatorioC();
             break;
 
             case '2':
-            relatorioObra();
+            moduloRelatorioO();
             break;
 
             case '3':
+            moduloRelatorioE();
+            break;
+        }
+    } while(resposta != '0');
+}
+
+void moduloRelatorioC(void){
+    char resposta;
+    do {
+        resposta = menuReUser();
+        switch(resposta){
+            case 'N':
+            telaRelcli();
+            break;
+        }
+    } while(resposta != '0');
+}
+
+void moduloRelatorioO(void){
+    char resposta;
+    do {
+        resposta = menuReObra();
+        switch(resposta){
+            case 'N':
+            relatorioObra();
+            break;
+        }
+    } while(resposta != '0');
+}
+
+void moduloRelatorioE(void){
+    char resposta;
+    do {
+        resposta = menuReEmp();
+        switch(resposta){
+            case 'N':
             relatorioEmp();
             break;
         }
