@@ -10,3 +10,4 @@ void telaRelcliO(void);
 void telaRelcliCom(void);
 void telaRelcliOd(void);
 void telaRelcliOi(void);
+void telaRelcliEm(void);

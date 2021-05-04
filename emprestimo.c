@@ -358,3 +358,30 @@ Emp* buscaEmp2(char* cpf){
     } fclose(fEmp);
     return NULL;
 }
+
+void relEmpE(void){
+    FILE *fEmp;
+    Emp *emp;
+    int count = 0;
+
+
+    emp = (Emp*)malloc(sizeof(Emp));
+    fEmp = fopen("Emprestimos.dat", "rb");
+    
+    if(fEmp == NULL){
+        printf("Não foi possivel Abrir o arquivo...\n\n Fechando...");
+        exit(1);
+    } while (fread(emp,sizeof(Emp), 1, fEmp)){
+            if(emp->status != 'x'){
+                count = count + 1;
+                printf("-------------------------------------------------\n");
+                printf("//.   %d - CPF: %s\n", count,emp->cpf);
+                printf("//.        ISBN: %s\n", emp->isbn);
+                printf("//.        EMAIL: %s\n", emp->dataEmp);
+                printf("//.        USUARIO: %s\n", emp->dataDevolve);
+                printf("------------------------------------------------\n");
+            }
+        }
+        fclose(fEmp);
+        free(emp);
+}
