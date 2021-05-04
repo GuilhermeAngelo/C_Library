@@ -58,3 +58,5 @@ void atualizaSenha(Usuario*, char*);
 void relClientes(void);
 
 void relClientesE(void);
+
+void relClientesCom(void);

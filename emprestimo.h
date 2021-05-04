@@ -26,4 +26,5 @@ void salvarEmp(Emp*);
 Emp* buscaEmp(char*);
 void exibirEmp(Emp*);
 Emp* buscaEmpDev(char*,char*);
+Emp* buscaEmp2(char*);
 void devEmp(Emp*,char*);

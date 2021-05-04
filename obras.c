@@ -694,7 +694,9 @@ void attStatus(Obras*obraLida, char*isbn){
 void relObras(void){
     FILE *fObra;
     Obras *obra;
-    int count = 0;
+    int count = 0,tam,tam2;
+    char truncTitulo[26];
+    char truncIsbn[26];
 
     obra = (Obras*)malloc(sizeof(Obras));
     fObra = fopen("Obras.dat", "rb");
@@ -705,7 +707,19 @@ void relObras(void){
     } while (fread(obra,sizeof(Obras), 1, fObra)){
             if(obra->status != 'x'){
                 count = count + 1;
-                printf("//.   %d - %s     ISBN: %s\n", count,obra->titulo,obra->isbn);
+                tam = strlen(truncTitulo);
+                tam2 = strlen(truncIsbn);
+                strncpy(truncTitulo,obra->titulo,tam);
+                strncpy(truncIsbn,obra->isbn,tam);
+                for(int i = tam; i < 25; i++){
+                    truncTitulo[i] = ' ';
+                }
+                truncTitulo[25] = '\0';
+                for(int i = tam2; i < 25; i++){
+                    truncIsbn[i] = ' ';
+                }
+                truncIsbn[25] = '\0';
+                printf("//.   %d - %-26s    %-26s\n", count,obra->titulo,obra->isbn);
             }
         }
         fclose(fObra);

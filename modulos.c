@@ -174,6 +174,10 @@ void moduloRelatorioC(void){
             case 'E':
             telaRelcliE();
             break;
+
+            case 'C':
+            telaRelcliCom();
+            break;
         }
     } while(resposta != '0');
 }

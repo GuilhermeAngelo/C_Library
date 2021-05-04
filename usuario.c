@@ -619,6 +619,41 @@ void relClientes(void){
 void relClientesE(void){
     FILE *fCli;
     Usuario *cliente;
+    char nomeTrunc[26];
+    char emailTrunc[27];
+    int count = 0,tam,tam2;
+
+    cliente = (Usuario*)malloc(sizeof(Usuario));
+    fCli = fopen("Usuarios.dat", "rb");
+    
+    if(fCli == NULL){
+        printf("Não foi possivel Abrir o arquivo...\n\n Fechando...");
+        exit(1);
+    } while (fread(cliente,sizeof(Usuario), 1, fCli)){
+            if(cliente->status != 'x'){
+                tam = strlen(cliente->nome);
+                tam2 = strlen(cliente->email);
+                strncpy(nomeTrunc, cliente->nome, tam);
+                strncpy(emailTrunc, cliente->email, tam2);
+                count = count + 1;
+                for(int i = tam; i < 25; i++){
+                    nomeTrunc[i] = ' ';
+                }
+                nomeTrunc[25] = '\0';
+                for(int i = tam2; i < 26; i++){
+                    emailTrunc[i] = ' ';
+                }
+                emailTrunc[26] = '\0';
+                printf("//.   %d - %-25s   %-25s\n", count,nomeTrunc,emailTrunc);
+            }
+        }
+        fclose(fCli);
+        free(cliente);
+}
+
+void relClientesCom(void){
+    FILE *fCli;
+    Usuario *cliente;
     int count = 0;
 
     cliente = (Usuario*)malloc(sizeof(Usuario));
@@ -630,7 +665,13 @@ void relClientesE(void){
     } while (fread(cliente,sizeof(Usuario), 1, fCli)){
             if(cliente->status != 'x'){
                 count = count + 1;
-                printf("//.   %d - %s          %s\n", count,cliente->nome,cliente->email);
+                printf("-------------------------------------------------\n");
+                printf("//.   %d - NOME: %s\n", count,cliente->nome);
+                printf("//.        CPF: %s\n", cliente->cpf);
+                printf("//.        EMAIL: %s\n", cliente->email);
+                printf("//.        USUARIO: %s\n", cliente->usuario);
+                printf("//.        SENHA: %s\n", cliente->senha);
+                printf("------------------------------------------------\n");
             }
         }
         fclose(fCli);

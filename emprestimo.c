@@ -212,8 +212,8 @@ void devolverEmp(void) {
         scanf("%[^\n]",isbn);
         getchar();
     }
-    busca = buscaEmp(isbn);
-    devEmp(busca,isbn);
+    busca = buscaEmp2(cpf);
+    devEmp(busca,cpf);
     busca2 = buscarObraD(isbn);
     attStatusD(busca2,isbn);
     free(busca);
@@ -283,9 +283,8 @@ Emp* buscaEmp(char* isbn){
     return NULL;
 }
 
-void devEmp(Emp* empLido, char*isbn){
+void devEmp(Emp* empLido, char*cpf){
     FILE *fEmp;
-    int achou = 0;
 
     if(empLido == NULL){
         printf("\n\nO EMPRESTIMO NAO EXISTE\n");
@@ -297,9 +296,8 @@ void devEmp(Emp* empLido, char*isbn){
             printf("Fechando o programa...");
             exit(1);
         }
-        while(!feof(fEmp)){
-            if(strcmp(empLido->isbn,isbn) == 0 && (empLido->status != 'x') ){
-                achou = 1;
+        while(fread(empLido,sizeof(Emp), 1, fEmp)){
+            if(strcmp(empLido->cpf,cpf) == 0 && empLido->status != 'x'){
                 empLido->status = 'x';
                 fseek(fEmp,-1*sizeof(Emp),SEEK_CUR);
                 fwrite(empLido,sizeof(Emp),1,fEmp);
@@ -331,6 +329,30 @@ Emp* buscaEmpDev(char *cpf, char *isbn){
                 fclose(fEmp);
                 return emprestimo;
             }
+        }
+    } fclose(fEmp);
+    return NULL;
+}
+
+Emp* buscaEmp2(char* cpf){
+    
+    FILE *fEmp;
+    Emp *emprestimo;
+
+    emprestimo = (Emp*)malloc(sizeof(Emp));
+
+    fEmp = fopen("Emprestimos.dat", "rb");
+
+    if(fEmp == NULL){
+        printf("Não foi possível ler o arquivo.\n\n");
+        printf("Fechando o arquivo...");
+        exit(1);
+    }
+    while (!feof(fEmp)){
+        fread(emprestimo,sizeof(Emp),1,fEmp);
+        if(strcmp(emprestimo->cpf,cpf) == 0 && (emprestimo->status != 'x')){
+            fclose(fEmp);
+            return emprestimo;   
         }
     } fclose(fEmp);
     return NULL;

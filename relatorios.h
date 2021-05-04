@@ -7,3 +7,4 @@ char menuReEmp(void);
 void telaRelcli(void);
 void telaRelcliE(void);
 void telaRelcliO(void);
+void telaRelcliCom(void);
