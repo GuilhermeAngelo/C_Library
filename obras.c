@@ -725,3 +725,73 @@ void relObras(void){
         fclose(fObra);
         free(obra);
 }
+
+void relObrasD(void){
+    FILE *fObra;
+    Obras *obra;
+    int count = 0,tam,tam2;
+    char truncTitulo[26];
+    char truncIsbn[26];
+
+    obra = (Obras*)malloc(sizeof(Obras));
+    fObra = fopen("Obras.dat", "rb");
+    
+    if(fObra == NULL){
+        printf("Não foi possivel Abrir o arquivo...\n\n Fechando...");
+        exit(1);
+    } while (fread(obra,sizeof(Obras), 1, fObra)){
+            if(obra->status != 'x' && obra->status != '0'){
+                count = count + 1;
+                tam = strlen(truncTitulo);
+                tam2 = strlen(truncIsbn);
+                strncpy(truncTitulo,obra->titulo,tam);
+                strncpy(truncIsbn,obra->isbn,tam);
+                for(int i = tam; i < 25; i++){
+                    truncTitulo[i] = ' ';
+                }
+                truncTitulo[25] = '\0';
+                for(int i = tam2; i < 25; i++){
+                    truncIsbn[i] = ' ';
+                }
+                truncIsbn[25] = '\0';
+                printf("//.   %d - %-26s    %-26s\n", count,obra->titulo,obra->isbn);
+            }
+        }
+        fclose(fObra);
+        free(obra);
+}
+
+void relObrasI(void){
+    FILE *fObra;
+    Obras *obra;
+    int count = 0,tam,tam2;
+    char truncTitulo[26];
+    char truncIsbn[26];
+
+    obra = (Obras*)malloc(sizeof(Obras));
+    fObra = fopen("Obras.dat", "rb");
+    
+    if(fObra == NULL){
+        printf("Não foi possivel Abrir o arquivo...\n\n Fechando...");
+        exit(1);
+    } while (fread(obra,sizeof(Obras), 1, fObra)){
+            if(obra->status != 'x' && obra->status == '0'){
+                count = count + 1;
+                tam = strlen(truncTitulo);
+                tam2 = strlen(truncIsbn);
+                strncpy(truncTitulo,obra->titulo,tam);
+                strncpy(truncIsbn,obra->isbn,tam);
+                for(int i = tam; i < 25; i++){
+                    truncTitulo[i] = ' ';
+                }
+                truncTitulo[25] = '\0';
+                for(int i = tam2; i < 25; i++){
+                    truncIsbn[i] = ' ';
+                }
+                truncIsbn[25] = '\0';
+                printf("//.   %d - %-26s    %-26s\n", count,obra->titulo,obra->isbn);
+            }
+        }
+        fclose(fObra);
+        free(obra);
+}

@@ -129,12 +129,8 @@ void moduloEmprestimo(void){
             case '2':
             consultarEmp();
             break;
-
-            case '3':
-            atualizarEmp();
-            break;
             
-            case '4':
+            case '3':
             devolverEmp();
             break;  
 
@@ -189,6 +185,14 @@ void moduloRelatorioO(void){
         switch(resposta){
             case 'N':
             telaRelcliO();
+            break;
+
+            case 'D':
+            telaRelcliOd();
+            break;
+
+            case 'I':
+            telaRelcliOi();
             break;
         }
     } while(resposta != '0');

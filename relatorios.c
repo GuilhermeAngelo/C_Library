@@ -50,7 +50,7 @@ char menuReObra(void) {
     printf("//.   0 - SAIR                                                                  .//\n");
     printf("//.   N - EXIBIR LISTA DE OBRAS                                                 .//\n");
     printf("//.   D - LISTA DE OBRAS DISPONIVEIS                                            .//\n");
-    printf("//.   A - LISTA DE OBRAS EMPRESTADAS                                            .//\n");
+    printf("//.   I - LISTA DE OBRAS EMPRESTADAS                                            .//\n");
     printf("//.                                                                             .//\n");
     printf("//.-----------------------------------------------------------------------------.//\n");
     printf("//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//\n");
@@ -80,7 +80,7 @@ char menuReEmp(void) {
     printf("//.   0 - SAIR                                                                  .//\n");
     printf("//.   N - EXIBIR LISTA DE EMPRESTIMOS                                           .//\n");
     printf("//.   I - EXIBIR LISTA DE ISBNS ALUGADOS                                        .//\n");
-    printf("//.   C - EXIBIR LISTA DE CPF's                                                 .//\n");
+    printf("//.   C - EXIBIR LISTA DE CPF's - ALUGANDO                                      .//\n");
     printf("//.                                                                             .//\n");
     printf("//.-----------------------------------------------------------------------------.//\n");
     printf("//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//\n");
@@ -150,7 +150,7 @@ void telaRelcliO(void){
     printf("/!!!!!!!!!!!!!!!!!!!!!!!          LISTA DE OBRAS         !!!!!!!!!!!!!!!!!!!!!!!!//\n");
     printf("//.-----------------------------------------------------------------------------.//\n");
     printf("//.                                                                             .//\n");
-    printf("//.   TITULO:                       ISBN                                        .//\n\n");
+    printf("//.   TITULO:                           ISBN:                                   .//\n\n");
     relObras();
     printf("//.-----------------------------------------------------------------------------.//\n");
     printf("//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//\n");
@@ -159,15 +159,40 @@ void telaRelcliO(void){
 
 }
 
+void telaRelcliOd(void){
 
-void relatorioObra(void){
-    int i;
-    for(i = 0; i < 10; i++){
-        printf("\n\nNOME:                               DATA DE PUBLICACAO:         AUTOR:           ISBN:           ED:   DISPONiVEL:   QNT:    QNT DE EMP: \n\n");
-        printf("OS SEGREDOS DA ALGEBRA PARA ITA E IME    JULHO,2018      MILLER DIAS DE ARAUJO  1435678904321     1       SIM          1           0\n"); 
-    }
+    system("cls");
+    printf("\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    printf("/!!!!!!!!!!!!!!!!!!!!!!!    LISTA DE OBRAS DISPONIVEIS   !!!!!!!!!!!!!!!!!!!!!!!!//\n");
+    printf("//.-----------------------------------------------------------------------------.//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   TITULO:                           ISBN:                                   .//\n\n");
+    relObrasD();
+    printf("//.-----------------------------------------------------------------------------.//\n");
+    printf("//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//\n");
+    printf("//-------------------------------------------------------------------------------//\n");
     getchar();
+
 }
+
+void telaRelcliOi(void){
+
+    system("cls");
+    printf("\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    printf("/!!!!!!!!!!!!!!!!!!!!!!!     LISTA DE OBRAS ALUGADAS     !!!!!!!!!!!!!!!!!!!!!!!!//\n");
+    printf("//.-----------------------------------------------------------------------------.//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.   TITULO:                           ISBN:                                   .//\n\n");
+    relObrasI();
+    printf("//.-----------------------------------------------------------------------------.//\n");
+    printf("//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    getchar();
+
+}
+
 void relatorioEmp(void){
     for(int i = 0; i < 10; i++){
         printf("USUARIO:     OBRA:       DIAS:       DATA DE ENTREGA:      QNT DE EMPRESTIMOS:\n\n");

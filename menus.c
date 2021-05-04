@@ -130,8 +130,7 @@ char menuEmprestimo(void) {
     printf("//.   0 - RETORNAR AO MENU PRINCIPAL                                            .//\n");
     printf("//.   1 - CADASTRAR UM NOVO EMPRESTIMO                                          .//\n");
     printf("//.   2 - PESQUISAR DADOS/CONSULTAR EMPRESTIMO                                  .//\n");
-    printf("//.   3 - ATUALIZAR EMPRESTIMO                                                  .//\n");
-    printf("//.   4 - DEVOLVER ITEM EMPRESTADO                                              .//\n");
+    printf("//.   3 - DEVOLVER ITEM EMPRESTADO                                              .//\n");
     printf("//.                                                                             .//\n");
     printf("//===============================================================================//\n");
     printf("Selecione: ");

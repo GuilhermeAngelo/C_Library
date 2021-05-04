@@ -63,3 +63,5 @@ void attStatusD(Obras*obraLida, char*isbn);
 Obras* buscarObraEmp(char*isbn);
 
 Obras* buscarObraD(char*isbn);
+void relObrasD(void);
+void relObrasI(void);

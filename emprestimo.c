@@ -277,7 +277,8 @@ Emp* buscaEmp(char* isbn){
         fread(emprestimo,sizeof(Emp),1,fEmp);
         if(strcmp(emprestimo->isbn,isbn) == 0 && (emprestimo->status != 'x')){
             fclose(fEmp);
-            return emprestimo;   
+            return emprestimo;
+            break;   
         }
     } fclose(fEmp);
     return NULL;
