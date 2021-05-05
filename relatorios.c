@@ -54,7 +54,7 @@ char menuReObra(void) {
     printf("//.   I - LISTA DE OBRAS EMPRESTADAS                                            .//\n");
     printf("//.   L - LISTA DE OBRAS - ORDEM ALFABETICA                                     .//\n");
     printf("//.   S - LISTA DE OBRAS EMPRESTADAS - ORDEM ALFABETICA                         .//\n");
-    printf("//.   T - LISTA DE OBRAS DISPONÍVEIS - ORDEM ALFABETICA                         .//\n");
+    printf("//.   T - LISTA DE OBRAS DISPONIVEIS - ORDEM ALFABETICA                         .//\n");
     printf("//.                                                                             .//\n");
     printf("//.-----------------------------------------------------------------------------.//\n");
     printf("//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//\n");

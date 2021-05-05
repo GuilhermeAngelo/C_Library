@@ -112,8 +112,8 @@ void consultarEmp(void) {
     scanf("%[^\n]",isbn);
     getchar();
     while (validaIsbn(isbn) == 0){
-        printf("//.   CPF INVALIDO\n\n");
-        printf("//.   CPF - apenas numeros - : ");
+        printf("//.   ISBN INVALIDO\n\n");
+        printf("//.   ISBN - apenas numeros - : ");
         scanf("%[^\n]", isbn);
         getchar();
     }
@@ -303,8 +303,9 @@ void devEmp(Emp* empLido, char*cpf){
                 empLido->status = 'x';
                 fseek(fEmp,-1*sizeof(Emp),SEEK_CUR);
                 fwrite(empLido,sizeof(Emp),1,fEmp);
+                free(empLido);
                 break;
-            } free(empLido);
+            }
         }
         fclose(fEmp); 
     }
