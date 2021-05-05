@@ -4,7 +4,6 @@
 #include <string.h>
 #include "usuario.h"
 
-
 void cadastrarUser(void) {
     Usuario *user;
 
