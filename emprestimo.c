@@ -6,7 +6,6 @@
 #include"emprestimo.h"
 #include <string.h>
 
-
 void cadastrarEmp(void) {
     int dia;
     int mes;
