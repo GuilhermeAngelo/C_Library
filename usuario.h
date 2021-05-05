@@ -60,3 +60,6 @@ void relClientes(void);
 void relClientesE(void);
 
 void relClientesCom(void);
+void apagarLista(Usuario **);
+void gerarRelatorio(Usuario **);
+void exibirLista(Usuario *);

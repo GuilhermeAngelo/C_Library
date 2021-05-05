@@ -21,6 +21,7 @@ char menuReUser(void) {
     printf("//.   N - LISTA DE NOMES DE CLIENTES - ORDEM DE CADASTRO                        .//\n");
     printf("//.   E - LISTA DE EMAIL DE CLIENTES - ORDEM DE CADASTRO                        .//\n");
     printf("//.   C - RELATORIO COMPLETO DE INFORMACOES - RESTRITO                          .//\n");
+    printf("//.   L - RELATORIO DE NOMES - ORDEM ALFABETICA                                 .//\n");
     printf("//.                                                                             .//\n");
     printf("//.-----------------------------------------------------------------------------.//\n");
     printf("//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//\n");
@@ -51,6 +52,9 @@ char menuReObra(void) {
     printf("//.   N - EXIBIR LISTA DE OBRAS                                                 .//\n");
     printf("//.   D - LISTA DE OBRAS DISPONIVEIS                                            .//\n");
     printf("//.   I - LISTA DE OBRAS EMPRESTADAS                                            .//\n");
+    printf("//.   L - LISTA DE OBRAS - ORDEM ALFABETICA                                     .//\n");
+    printf("//.   S - LISTA DE OBRAS EMPRESTADAS - ORDEM ALFABETICA                         .//\n");
+    printf("//.   T - LISTA DE OBRAS DISPONÍVEIS - ORDEM ALFABETICA                         .//\n");
     printf("//.                                                                             .//\n");
     printf("//.-----------------------------------------------------------------------------.//\n");
     printf("//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//\n");
@@ -79,8 +83,7 @@ char menuReEmp(void) {
     printf("//.                                                                             .//\n");
     printf("//.   0 - SAIR                                                                  .//\n");
     printf("//.   N - EXIBIR LISTA DE EMPRESTIMOS                                           .//\n");
-    printf("//.   I - EXIBIR LISTA DE ISBNS ALUGADOS                                        .//\n");
-    printf("//.   C - EXIBIR LISTA DE CPF's - ALUGANDO                                      .//\n");
+    printf("//.   I - EXIBIR LISTA DE EMPRESTIMOS DEVOLVIDOS                                .//\n");
     printf("//.                                                                             .//\n");
     printf("//.-----------------------------------------------------------------------------.//\n");
     printf("//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//\n");
@@ -209,11 +212,94 @@ void telaRelcliEm(void){
     getchar();
 
 }
-void relatorioEmp(void){
-    for(int i = 0; i < 10; i++){
-        printf("USUARIO:     OBRA:       DIAS:       DATA DE ENTREGA:      QNT DE EMPRESTIMOS:\n\n");
-        printf("guilehrm      Pi           7           20/03/2021                   1\n");
-    }
+
+void telaRelcliEmd(void){
+
+    system("cls");
+    printf("\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    printf("/!!!!!!!!!!!!!!!!!!       LISTA DE EMPRESTIMOS DEVOLVIDOS      !!!!!!!!!!!!!!!!!!//\n");
+    printf("//.-----------------------------------------------------------------------------.//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.                                                                             .//\n");
+    relEmpD();
+    printf("//.-----------------------------------------------------------------------------.//\n");
+    printf("//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    getchar();
+
+}
+
+void telaRelcliOrdem(void){
+
+    system("cls");
+    Usuario *lista = NULL;
+    printf("\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    printf("/!!!!!!!!!!!!!!!!!!!!!!!         LISTA DE CLIENTES       !!!!!!!!!!!!!!!!!!!!!!!!//\n");
+    printf("//.-----------------------------------------------------------------------------.//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.                                                                             .//\n\n");
+    gerarRelatorio(&lista);
+    exibirLista(lista);
+    printf("//.-----------------------------------------------------------------------------.//\n");
+    printf("//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    getchar();
+
+}
+
+void telaRelcliOrdemO(void){
+
+    system("cls");
+    Obras *lista = NULL;
+    printf("\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    printf("/!!!!!!!!!!!!!!!!!!!!!!!          LISTA DE OBRAS         !!!!!!!!!!!!!!!!!!!!!!!!//\n");
+    printf("//.-----------------------------------------------------------------------------.//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.                                                                             .//\n\n");
+    gerarRelatorioO(&lista);
+    exibirListaO(lista);
+    printf("//.-----------------------------------------------------------------------------.//\n");
+    printf("//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//\n");
+    printf("//-------------------------------------------------------------------------------//\n");
     getchar();
 }
 
+void telaRelcliOrdemOi(void){
+
+    system("cls");
+    Obras *lista = NULL;
+    printf("\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    printf("/!!!!!!!!!!!!!!!!!!!!!!!  LISTA DE OBRAS INDISPONIVEIS   !!!!!!!!!!!!!!!!!!!!!!!!//\n");
+    printf("//.-----------------------------------------------------------------------------.//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.                                                                             .//\n\n");
+    gerarRelatorioIordem(&lista);
+    exibirListaO(lista);
+    printf("//.-----------------------------------------------------------------------------.//\n");
+    printf("//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    getchar();
+}
+
+void telaRelcliOrdemOd(void){
+
+    system("cls");
+    Obras *lista = NULL;
+    printf("\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    printf("/!!!!!!!!!!!!!!!!!!!!!!!   LISTA DE OBRAS DISPONIVEIS    !!!!!!!!!!!!!!!!!!!!!!!!//\n");
+    printf("//.-----------------------------------------------------------------------------.//\n");
+    printf("//.                                                                             .//\n");
+    printf("//.                                                                             .//\n\n");
+    gerarRelatorioDordem(&lista);
+    exibirListaO(lista);
+    printf("//.-----------------------------------------------------------------------------.//\n");
+    printf("//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//\n");
+    printf("//-------------------------------------------------------------------------------//\n");
+    getchar();
+
+}

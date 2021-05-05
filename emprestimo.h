@@ -29,3 +29,4 @@ Emp* buscaEmpDev(char*,char*);
 Emp* buscaEmp2(char*);
 void devEmp(Emp*,char*);
 void relEmpE(void);
+void relEmpD(void);

@@ -65,3 +65,8 @@ Obras* buscarObraEmp(char*isbn);
 Obras* buscarObraD(char*isbn);
 void relObrasD(void);
 void relObrasI(void);
+void apagarListaO(Obras **lista);
+void gerarRelatorioO(Obras **lista);
+void gerarRelatorioIordem(Obras **lista);
+void gerarRelatorioDordem(Obras **lista);
+void exibirListaO(Obras *aux);

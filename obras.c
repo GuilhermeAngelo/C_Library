@@ -463,14 +463,15 @@ void delObra(Obras* obraLida, char*isbn){
             printf("Fechando o programa...");
             exit(1);
         }
-        while(!feof(fObra)){
+        while(fread(obraLida,sizeof(Obras),1,fObra)){
             if(strcmp(obraLida->isbn,isbn) == 0 && (obraLida->status != 'x') ){
                 achou = 1;
                 obraLida->status = 'x';
                 fseek(fObra, -1*sizeof(Obras), SEEK_CUR);
                 fwrite(obraLida,sizeof(Obras),1,fObra);
+                free(obraLida);
                 break;
-            } free(obraLida);
+            }
         }
         fclose(fObra); 
     }
@@ -491,7 +492,7 @@ void atualizaTitulo(Obras* obraLida, char*isbn){
             printf("Fechando o programa...");
             exit(1);
         }
-        while(!feof(fObra)){
+        while(fread(obraLida,sizeof(Obras),1,fObra)){
             if(strcmp(obraLida->isbn,isbn) == 0 && (obraLida ->status != 'x') ){
                 achou = 1;
                 printf("DIGITE O NOVO TITULO: ");
@@ -506,12 +507,10 @@ void atualizaTitulo(Obras* obraLida, char*isbn){
                 strcpy(obraLida->titulo, tituloN);
                 fseek(fObra, -1*sizeof(Obras), SEEK_CUR);
                 fwrite(obraLida,sizeof(Obras),1,fObra);
+                free(obraLida);
                 break;
-            } free(obraLida);
-        } if(achou == 0){
-            printf("\n\nObra nao foi encontrado");
-            fclose(fObra);
             }
+        }
         fclose(fObra); 
     }
 }
@@ -531,7 +530,7 @@ void atualizaAutor(Obras* obraLida, char*isbn){
             printf("Fechando o programa...");
             exit(1);
         }
-        while(!feof(fObra)){
+        while(fread(obraLida,sizeof(Obras),1,fObra)){
             if(strcmp(obraLida->isbn,isbn) == 0 && (obraLida ->status != 'x') ){
                 achou = 1;
                 printf("DIGITE O NOVO AUTOR: ");
@@ -546,12 +545,10 @@ void atualizaAutor(Obras* obraLida, char*isbn){
                 strcpy(obraLida->autor,autorN);
                 fseek(fObra, -1*sizeof(Obras), SEEK_CUR);
                 fwrite(obraLida,sizeof(Obras),1,fObra);
+                free(obraLida);
                 break;
-            } free(obraLida);
-        } if(achou == 0){
-            printf("\n\nObra nao foi encontrado");
-            fclose(fObra);
-            }
+            } 
+        } 
         fclose(fObra); 
     }
 }
@@ -571,7 +568,7 @@ void atualizaDatap(Obras* obraLida, char*isbn){
             printf("Fechando o programa...");
             exit(1);
         }
-        while(!feof(fObra)){
+        while(fread(obraLida,sizeof(Obras),1,fObra)){
             if(strcmp(obraLida->isbn,isbn) == 0 && (obraLida ->status != 'x') ){
                 achou = 1;
                 printf("DIGITE A NOVA DATA DE PUBLICACAO: ");
@@ -594,12 +591,10 @@ void atualizaDatap(Obras* obraLida, char*isbn){
                 strcpy(obraLida->datap,datapN);
                 fseek(fObra, -1*sizeof(Obras), SEEK_CUR);
                 fwrite(obraLida,sizeof(Obras),1,fObra);
+                free(obraLida);
                 break;
-            } free(obraLida);
-        } if(achou == 0){
-            printf("\n\nObra nao foi encontrado");
-            fclose(fObra);
             }
+        }
         fclose(fObra); 
     }
 }
@@ -619,7 +614,7 @@ void atualizaEdicao(Obras* obraLida, char*isbn){
             printf("Fechando o programa...");
             exit(1);
         }
-        while(!feof(fObra)){
+        while(fread(obraLida,sizeof(Obras),1,fObra)){
             if(strcmp(obraLida->isbn,isbn) == 0 && (obraLida ->status != 'x') ){
                 achou = 1;
                 printf("DIGITE A NOVA EDICAO: ");
@@ -628,12 +623,10 @@ void atualizaEdicao(Obras* obraLida, char*isbn){
                 strcpy(obraLida->edicao,edicaoN);
                 fseek(fObra, -1*sizeof(Obras), SEEK_CUR);
                 fwrite(obraLida,sizeof(Obras),1,fObra);
+                free(obraLida);
                 break;
-            } free(obraLida);
-        } if(achou == 0){
-            printf("\n\nObra nao foi encontrado");
-            fclose(fObra);
             }
+        }
         fclose(fObra); 
     }
 }
@@ -652,13 +645,14 @@ void attStatusD(Obras* obraLida, char*isbn){
             printf("Fechando o programa...");
             exit(1);
         }
-        while(!feof(fObra)){
+        while(fread(obraLida,sizeof(Obras),1,fObra)){
             if(strcmp(obraLida->isbn,isbn) == 0 && (obraLida->status != 'x') && (obraLida->status == '0') ){
                 obraLida->status = '1';
                 fseek(fObra, -1*sizeof(Obras), SEEK_CUR);
                 fwrite(obraLida,sizeof(Obras),1,fObra);
+                free(obraLida);
                 break;
-            } free(obraLida);
+            }
         }
         fclose(fObra); 
     }
@@ -678,14 +672,15 @@ void attStatus(Obras*obraLida, char*isbn){
             printf("Fechando o programa...");
             exit(1);
         }
-        while(!feof(fObra)){
+        while(fread(obraLida,sizeof(Obras),1,fObra)){
             if(strcmp(obraLida->isbn,isbn) == 0 && (obraLida->status != 'x')){
                 achou = 1;
                 obraLida->status = '0';
                 fseek(fObra, -1*sizeof(Obras), SEEK_CUR);
                 fwrite(obraLida,sizeof(Obras),1,fObra);
+                free(obraLida);
                 break;
-            } free(obraLida);
+            }
         }
         fclose(fObra); 
     }
@@ -794,4 +789,162 @@ void relObrasI(void){
         }
         fclose(fObra);
         free(obra);
+}
+
+void apagarListaO(Obras **lista)
+{
+    Obras *obra;
+    
+    while (*lista != NULL)
+    {
+   	 obra = *lista;
+   	 *lista = (*lista)->prox;
+   	 free(obra);
+    }   
+}
+
+void gerarRelatorioO(Obras **lista)
+{
+    FILE *fp;
+    Obras *obra;
+    
+    apagarListaO(&(*lista));
+    *lista = NULL;
+    fp = fopen("Obras.dat","rb");
+    if (fp == NULL)
+    {
+   	 printf("Erro na abertura do arquivo... \n");
+   	 exit(1);
+    }
+    else
+    {
+   	 obra = (Obras *) malloc(sizeof(Obras));
+   	 while (fread(obra, sizeof(Obras), 1, fp))
+   	 {
+        if ((*lista == NULL) || (strcmp(obra->titulo, (*lista)->titulo) < 0)) {
+           if(obra->status != 'x'){
+                obra->prox = *lista;
+                *lista = obra;
+          }
+        } else  { 
+          Obras* ant = *lista;
+          Obras* atu = (*lista)->prox;
+
+          if(obra->status != 'x' ){
+          while ((atu != NULL) && (strcmp(atu->titulo, obra->titulo) < 0)) {
+            ant = atu;
+            atu = atu->prox;
+          }
+          ant->prox = obra;
+          obra->prox = atu;
+          }
+
+        }
+        obra = (Obras *) malloc(sizeof(Obras));
+   	 }
+   	 free(obra);
+   	 fclose(fp);
+    }
+}
+
+void exibirListaO(Obras *aux)
+{
+	while (aux != NULL)
+	{   
+        printf("----------------------------------------\n");
+    	printf("TITULO: %s\n",aux->titulo);
+        printf("DATA DE PUBLICACAO: %s\n",aux->datap);
+        printf("EDICAO: %s\n",aux->edicao);
+        printf("ISBN: %s\n",aux->isbn);
+    	aux = aux->prox;
+	}
+    printf("----------------------------------------\n");
+}
+
+void gerarRelatorioIordem(Obras **lista)
+{
+    FILE *fp;
+    Obras *obra;
+    
+    apagarListaO(&(*lista));
+    *lista = NULL;
+    fp = fopen("Obras.dat","rb");
+    if (fp == NULL)
+    {
+   	 printf("Erro na abertura do arquivo... \n");
+   	 exit(1);
+    }
+    else
+    {
+   	 obra = (Obras *) malloc(sizeof(Obras));
+   	 while (fread(obra, sizeof(Obras), 1, fp))
+   	 {
+        if ((*lista == NULL) || (strcmp(obra->titulo, (*lista)->titulo) < 0)) {
+           if(obra->status != 'x' && obra->status == '0'){
+                obra->prox = *lista;
+                *lista = obra;
+          }
+        } else  { 
+          Obras* ant = *lista;
+          Obras* atu = (*lista)->prox;
+
+          if(obra->status != 'x' && obra->status == '0' ){
+          while ((atu != NULL) && (strcmp(atu->titulo, obra->titulo) < 0)) {
+            ant = atu;
+            atu = atu->prox;
+          }
+          ant->prox = obra;
+          obra->prox = atu;
+          }
+
+        }
+        obra = (Obras *) malloc(sizeof(Obras));
+   	 }
+   	 free(obra);
+   	 fclose(fp);
+    }
+}
+
+void gerarRelatorioDordem(Obras **lista)
+{
+    FILE *fp;
+    Obras *obra;
+    
+    apagarListaO(&(*lista));
+    *lista = NULL;
+    fp = fopen("Obras.dat","rb");
+    if (fp == NULL)
+    {
+   	 printf("Erro na abertura do arquivo... \n");
+   	 exit(1);
+    }
+    else
+    {
+   	 obra = (Obras *) malloc(sizeof(Obras));
+   	 while (fread(obra, sizeof(Obras), 1, fp))
+   	 {
+        if ((*lista == NULL) || (strcmp(obra->titulo, (*lista)->titulo) < 0)) {
+           if(obra->status != 'x' && obra->status != '0'){
+                obra->prox = *lista;
+                *lista = obra;
+          }
+        } else  { 
+          Obras* ant = *lista;
+          Obras* atu = (*lista)->prox;
+
+          if(obra->status != 'x' && obra->status != '0'){
+          while ((atu != NULL) && (strcmp(atu->titulo, obra->titulo) < 0)) {
+            ant = atu;
+            atu = atu->prox;
+          }
+          ant->prox = obra;
+          obra->prox = atu;
+          }
+
+        }
+        obra = (Obras *) malloc(sizeof(Obras));
+   	 }
+   	 free(obra);
+   	 fclose(fp);
+    }
 }

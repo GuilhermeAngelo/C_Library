@@ -175,6 +175,10 @@ void moduloRelatorioC(void){
             case 'C':
             telaRelcliCom();
             break;
+
+            case 'L':
+            telaRelcliOrdem();
+            break;
         }
     } while(resposta != '0');
 }
@@ -195,6 +199,18 @@ void moduloRelatorioO(void){
             case 'I':
             telaRelcliOi();
             break;
+
+            case 'L':
+            telaRelcliOrdemO();
+            break;
+
+            case 'S':
+            telaRelcliOrdemOi();
+            break;
+
+            case 'T':
+            telaRelcliOrdemOd();
+            break;
         }
     } while(resposta != '0');
 }
@@ -206,6 +222,10 @@ void moduloRelatorioE(void){
         switch(resposta){
             case 'N':
             telaRelcliEm();
+            break;
+            
+            case 'I':
+            telaRelcliEmd();
             break;
         }
     } while(resposta != '0');

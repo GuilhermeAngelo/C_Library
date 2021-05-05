@@ -420,7 +420,7 @@ void atualiza(Usuario* userLido, char*cpf){
             printf("Fechando o programa...");
             exit(1);
         }
-        while(!feof(fUser)){
+        while(fread(userLido,sizeof(Usuario),1, fUser)){
             if(strcmp(userLido->cpf,cpf) == 0 && (userLido ->status != 'x') ){
                 achou = 1;
                 printf("DIGITE O NOVO NOME: ");
@@ -435,12 +435,11 @@ void atualiza(Usuario* userLido, char*cpf){
                 strcpy(userLido->nome, nomeN);
                 fseek(fUser, -1*sizeof(Usuario), SEEK_CUR);
                 fwrite(userLido,sizeof(Usuario),1,fUser);
+                free(userLido);
                 break;
-            } free(userLido);
-        } if(achou == 0){
-            printf("\n\nUsuario nao foi encontrado");
-            fclose(fUser);
             }
+
+        }
         fclose(fUser); 
     }
 }
@@ -459,18 +458,16 @@ void delUser(Usuario* userLido, char*cpf){
             printf("Fechando o programa...");
             exit(1);
         }
-        while(!feof(fUser)){
+        while(fread(userLido,sizeof(Usuario),1, fUser)){
             if(strcmp(userLido->cpf,cpf) == 0 && (userLido->status != 'x') ){
                 achou = 1;
                 userLido->status = 'x';
                 fseek(fUser, -1*sizeof(Usuario), SEEK_CUR);
                 fwrite(userLido,sizeof(Usuario),1,fUser);
+                free(userLido);
                 break;
-            } free(userLido);
-        } if(achou == 0){
-            printf("\n\nUsuario nao foi encontrado");
-            fclose(fUser);
             }
+        } 
         fclose(fUser); 
     }
 }
@@ -490,7 +487,7 @@ void atualizaEmail(Usuario* userLido, char*cpf){
             printf("Fechando o programa...");
             exit(1);
         }
-        while(!feof(fUser)){
+        while(fread(userLido,sizeof(Usuario),1, fUser)){
             if(strcmp(userLido->cpf,cpf) == 0 && (userLido->status != 'x') ){
                 achou = 1;
                 printf("DIGITE O NOVO EMAIL: ");
@@ -505,12 +502,10 @@ void atualizaEmail(Usuario* userLido, char*cpf){
                 strcpy(userLido->email, emailN);
                 fseek(fUser, -1*sizeof(Usuario), SEEK_CUR);
                 fwrite(userLido,sizeof(Usuario),1,fUser);
+                free(userLido);
                 break;
-            } free(userLido);
-        } if(achou == 0){
-            printf("\n\nUsuario nao foi encontrado");
-            fclose(fUser);
-            }
+            } 
+        } 
         fclose(fUser); 
     }
 }
@@ -530,7 +525,7 @@ void atualizaLogin(Usuario* userLido, char*cpf){
             printf("Fechando o programa...");
             exit(1);
         }
-        while(!feof(fUser)){
+        while(fread(userLido,sizeof(Usuario),1, fUser)){
             if(strcmp(userLido->cpf,cpf) == 0 && (userLido->status != 'x') ){
                 achou = 1;
                 printf("DIGITE O NOVO LOGIN: ");
@@ -545,12 +540,10 @@ void atualizaLogin(Usuario* userLido, char*cpf){
                 strcpy(userLido->usuario, loginN);
                 fseek(fUser, -1*sizeof(Usuario), SEEK_CUR);
                 fwrite(userLido,sizeof(Usuario),1,fUser);
+                free(userLido);
                 break;
-            } free(userLido);
-        } if(achou == 0){
-            printf("\n\nUsuario nao foi encontrado");
-            fclose(fUser);
             }
+        } 
         fclose(fUser); 
     }
 }
@@ -570,7 +563,7 @@ void atualizaSenha(Usuario* userLido, char*cpf){
             printf("Fechando o programa...");
             exit(1);
         }
-        while(!feof(fUser)){
+        while(fread(userLido,sizeof(Usuario),1, fUser)){
             if(strcmp(userLido->cpf,cpf) == 0 && (userLido->status != 'x') ){
                 achou = 1;
                 printf("DIGITE A NOVA SENHA: ");
@@ -585,12 +578,10 @@ void atualizaSenha(Usuario* userLido, char*cpf){
                 strcpy(userLido->senha, senhaN);
                 fseek(fUser, -1*sizeof(Usuario), SEEK_CUR);
                 fwrite(userLido,sizeof(Usuario),1,fUser);
+                free(userLido);
                 break;
-            } free(userLido);
-        } if(achou == 0){
-            printf("\n\nUsuario nao foi encontrado");
-            fclose(fUser);
             }
+        }
         fclose(fUser); 
     }
 }
@@ -676,4 +667,75 @@ void relClientesCom(void){
         }
         fclose(fCli);
         free(cliente);
+}
+
+
+void apagarLista(Usuario **lista)
+{
+    Usuario *user;
+    
+    while (*lista != NULL)
+    {
+   	 user = *lista;
+   	 *lista = (*lista)->prox;
+   	 free(user);
+    }   
+}
+
+void gerarRelatorio(Usuario **lista)
+{
+    FILE *fp;
+    Usuario *user;
+    
+    apagarLista(&(*lista));
+    *lista = NULL;
+    fp = fopen("Usuarios.dat","rb");
+    if (fp == NULL)
+    {
+   	 printf("Erro na abertura do arquivo... \n");
+   	 exit(1);
+    }
+    else
+    {
+   	 user = (Usuario *) malloc(sizeof(Usuario));
+   	 while (fread(user, sizeof(Usuario), 1, fp))
+   	 {
+        if ((*lista == NULL) || (strcmp(user->nome, (*lista)->nome) < 0)) {
+           if(user->status != 'x'){
+                user->prox = *lista;
+                *lista = user;
+          }
+        } else  { 
+          Usuario* ant = *lista;
+          Usuario* atu = (*lista)->prox;
+
+          if(user->status != 'x' ){
+          while ((atu != NULL) && (strcmp(atu->nome, user->nome) < 0)) {
+            ant = atu;
+            atu = atu->prox;
+          }
+          ant->prox = user;
+          user->prox = atu;
+          }
+
+        }
+        user = (Usuario *) malloc(sizeof(Usuario));
+   	 }
+   	 free(user);
+   	 fclose(fp);
+    }    
+}
+
+void exibirLista(Usuario *aux)
+{
+	while (aux != NULL)
+	{   
+        printf("----------------------------------------\n");
+    	printf("NOME: %s\n",aux->nome);
+        printf("EMAIL: %s\n",aux->email);
+        printf("LOGIN: %s\n",aux->usuario);
+        printf("SENHA: %s\n",aux->senha);
+    	aux = aux->prox;
+	}
+    printf("----------------------------------------\n");
 }
