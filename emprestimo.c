@@ -259,6 +259,7 @@ void exibirEmp(Emp* emprestimo){
     free(emprestimo);
 }
 
+
 Emp* buscaEmp(char* isbn){
     
     FILE *fEmp;
