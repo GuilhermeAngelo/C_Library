@@ -406,8 +406,8 @@ void relEmpD(void){
                 printf("-------------------------------------------------\n");
                 printf("//.   %d - CPF: %s\n", count,emp->cpf);
                 printf("//.        ISBN: %s\n", emp->isbn);
-                printf("//.        EMAIL: %s\n", emp->dataEmp);
-                printf("//.        USUARIO: %s\n", emp->dataDevolve);
+                printf("//.        DATA DE EMPRESTIMO: %s\n", emp->dataEmp);
+                printf("//.        DATA DE DEVOLUCAO: %s\n", emp->dataDevolve);
                 printf("------------------------------------------------\n");
             }
         }
